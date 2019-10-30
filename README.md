@@ -1,13 +1,24 @@
 ### Food Mood Project
 
 ### Project Goal
-Takes a user input and creates a page with various content related to that food.
+A user inputs a specific food (or select a preset food) and creates a page with various content related to that food such as images, gifs, restaurant recommendations, recipes, fun facts, and nutrition information.  This app will help food enthusiasts get inspired to cook a new dish or simply provide a little entertainment for anyone with food on their mind.
 
 #### Team Members
-Levar Barrett
-Graeme Stewart
-Jonathan Johnson
-Farrah Carter
+Levar Barrett (Recipe API)
+Graeme Stewart (Food Nutrition API)
+Jonathan Johnson (HTML code)
+Farrah Carter (Images, gifs API)
+
+### APIs Used
+* giphy
+* pexels
+* food2fork
+* USDA FoodData Central
+* bootstrap
+* jquery
+
+### New Technology Used
+* hover.css
 
 ### Project Requirements
 * Use at least two APIs.
@@ -22,7 +33,3 @@ Farrah Carter
 * Include user input validation
 * `OPTIONAL` Includes mobile responsiveness
 * `OPTIONAL` Uses alternative css framework
-
-### APIs Used
-* bootstrap
-* jquery
