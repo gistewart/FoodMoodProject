@@ -1,51 +1,53 @@
-const userInput = 'cauliflower';
-const data = {
-    'generalSearchInput': userInput
-};
-const url = 'https://api.nal.usda.gov/fdc/v1/search?api_key=ZVW3xGLgjZqCbvHWwuGgXCYMKY3rXnbM3jWnLjn5';
-
-fetch(url, {
-        method: 'POST',
-        body: JSON.stringify(data),
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-    .then(function(response) {
-        return response.json();
-    })
-    .then(function(response) {
-        console.log(response);
-
-        fetch(`https://api.nal.usda.gov/fdc/v1/${response.foods[0].fdcId}?api_key=ZVW3xGLgjZqCbvHWwuGgXCYMKY3rXnbM3jWnLjn5`)
-            .then(function(response) {
-                return response.json();
-            })
-            .then(function(response) {
-                console.log(response);
-                // Transfer content to HTML
-                $(".calcium").text(JSON.stringify("Calcium: " + response.labelNutrients.calcium.value));
-                $(".calories").text(JSON.stringify("Calories: " + response.labelNutrients.calories.value));
-                $(".carbohydrates").text(JSON.stringify("Carbohydrates: " + response.labelNutrients.carbohydrates.value));
-                $(".cholesterol").text(JSON.stringify("Cholesterol: " + response.labelNutrients.cholesterol.value));
-                $(".fat").text(JSON.stringify("Fat: " + response.labelNutrients.fat.value));
-                $(".fiber").text(JSON.stringify("Fiber: " + response.labelNutrients.fiber.value));
-                $(".iron").text(JSON.stringify("Iron: " + response.labelNutrients.iron.value));
-                $(".protein").text(JSON.stringify("Protein: " + response.labelNutrients.protein.value));
-                $(".saturatedFat").text(JSON.stringify("Saturated Fat: " + response.labelNutrients.saturatedFat.value));
-                $(".sodium").text(JSON.stringify("Sodium: " + response.labelNutrients.sodium.value));
-                $(".sugars").text(JSON.stringify("Sugars: " + response.labelNutrients.sugars.value));
-                $(".transFat").text(JSON.stringify("Trans Fat: " + response.labelNutrients.transFat.value));
-            });
-    });
 //variable for input
 let foodInput = "spaghetti";
 let gifOffset = 0;
 let imgPage = 1;
+//variables for nutrition input
+const data = {
+    'generalSearchInput': foodInput
+};
+const USDAurl = 'https://api.nal.usda.gov/fdc/v1/search?api_key=ZVW3xGLgjZqCbvHWwuGgXCYMKY3rXnbM3jWnLjn5';
+
+fetch(USDAurl, {
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: {
+        'Content-Type': 'application/json'
+    }
+})
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (response) {
+        console.log(response);
+
+        fetch(`https://api.nal.usda.gov/fdc/v1/${response.foods[0].fdcId}?api_key=ZVW3xGLgjZqCbvHWwuGgXCYMKY3rXnbM3jWnLjn5`)
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (response) {
+                console.log(response);
+                // Transfer content to HTML
+                $("#nutritionTitle").text(foodInput.toUpperCase())
+                $("#calcium").text("Calcium: " + response.labelNutrients.calcium.value);
+                $("#calories").text("Calories: " + response.labelNutrients.calories.value);
+                $("#carbohydrates").text("Carbohydrates: " + response.labelNutrients.carbohydrates.value);
+                $("#cholesterol").text("Cholesterol: " + response.labelNutrients.cholesterol.value);
+                $("#fat").text("Fat: " + response.labelNutrients.fat.value);
+                $("#fiber").text("Fiber: " + response.labelNutrients.fiber.value);
+                $("#iron").text("Iron: " + response.labelNutrients.iron.value);
+                $("#protein").text("Protein: " + response.labelNutrients.protein.value);
+                $("#saturatedFat").text("Saturated Fat: " + response.labelNutrients.saturatedFat.value);
+                $("#sodium").text("Sodium: " + response.labelNutrients.sodium.value);
+                $("#sugars").text("Sugars: " + response.labelNutrients.sugars.value);
+                $("#transFat").text("Trans Fat: " + response.labelNutrients.transFat.value);
+            });
+    });
+
 
 function getGif() {
     $("#gifDiv").empty()
-        //object containing parameters 
+    //object containing parameters 
     const gifQueryParams = {
         "api_key": "CbRv29mIUSwkTAVauYUvcQ8lOGyxCop2",
         q: foodInput,
@@ -63,7 +65,7 @@ function getGif() {
         //calls giphy search
         url: gifQueryURL,
         Method: "GET"
-    }).then(function(response) {
+    }).then(function (response) {
         console.log(response);
         //creates image div and appends to DOM
         const gifContent = "<img src=" + response.data[0].images.fixed_width.url + "/>";
@@ -92,10 +94,10 @@ function getPic() {
         //calls pexel url search
         url: imgQueryUrl,
         Method: "GET",
-        beforeSend: function(request) {
+        beforeSend: function (request) {
             request.setRequestHeader("Authorization", "563492ad6f91700001000001a0e4738780644fac9acefdba362470d6");
         },
-    }).then(function(response) {
+    }).then(function (response) {
         console.log(response);
         for (let i = 0; i < response.photos.length; i++) {
             //adds image to the DOM
@@ -136,20 +138,21 @@ function recipe() {
       console.log("Title: " + response.recipes[1].title);
     });
   }
+  
 $(document).ready(function() {
     getGif();
     getPic();
     recipe();
 
     //refresh gif function
-    $(document).on("click", "#refreshGif", function() {
+    $(document).on("click", "#refreshGif", function () {
         gifOffset++;
         getGif();
 
     })
 
     //refresh images function
-    $(document).on("click", "#refreshImg", function() {
+    $(document).on("click", "#refreshImg", function () {
         imgPage++;
         console.log(imgPage);
         getPic();
