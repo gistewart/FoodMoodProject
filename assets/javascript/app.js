@@ -1,10 +1,17 @@
-const userInput = 'cauliflower';
-const data = {
-    'generalSearchInput': userInput
-};
-const url = 'https://api.nal.usda.gov/fdc/v1/search?api_key=ZVW3xGLgjZqCbvHWwuGgXCYMKY3rXnbM3jWnLjn5';
+//variables
+let gifOffset = 0;
+let imgPage = 1;
 
-fetch(url, {
+//variables for nutrition input
+
+
+function getNutrition(foodInput) {
+    let data = {
+        'generalSearchInput': foodInput
+    };
+    const USDAurl = 'https://api.nal.usda.gov/fdc/v1/search?api_key=ZVW3xGLgjZqCbvHWwuGgXCYMKY3rXnbM3jWnLjn5';
+    
+    fetch(USDAurl, {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {
@@ -24,26 +31,24 @@ fetch(url, {
             .then(function (response) {
                 console.log(response);
                 // Transfer content to HTML
-                $(".calcium").text(JSON.stringify("Calcium: " + response.labelNutrients.calcium.value));
-                $(".calories").text(JSON.stringify("Calories: " + response.labelNutrients.calories.value));
-                $(".carbohydrates").text(JSON.stringify("Carbohydrates: " + response.labelNutrients.carbohydrates.value));
-                $(".cholesterol").text(JSON.stringify("Cholesterol: " + response.labelNutrients.cholesterol.value));
-                $(".fat").text(JSON.stringify("Fat: " + response.labelNutrients.fat.value));
-                $(".fiber").text(JSON.stringify("Fiber: " + response.labelNutrients.fiber.value));
-                $(".iron").text(JSON.stringify("Iron: " + response.labelNutrients.iron.value));
-                $(".protein").text(JSON.stringify("Protein: " + response.labelNutrients.protein.value));
-                $(".saturatedFat").text(JSON.stringify("Saturated Fat: " + response.labelNutrients.saturatedFat.value));
-                $(".sodium").text(JSON.stringify("Sodium: " + response.labelNutrients.sodium.value));
-                $(".sugars").text(JSON.stringify("Sugars: " + response.labelNutrients.sugars.value));
-                $(".transFat").text(JSON.stringify("Trans Fat: " + response.labelNutrients.transFat.value));
+                $("#nutritionTitle").text(foodInput.toUpperCase())
+                $("#calcium").text("Calcium: " + response.labelNutrients.calcium.value);
+                $("#calories").text("Calories: " + response.labelNutrients.calories.value);
+                $("#carbohydrates").text("Carbohydrates: " + response.labelNutrients.carbohydrates.value);
+                $("#cholesterol").text("Cholesterol: " + response.labelNutrients.cholesterol.value);
+                $("#fat").text("Fat: " + response.labelNutrients.fat.value);
+                $("#fiber").text("Fiber: " + response.labelNutrients.fiber.value);
+                $("#iron").text("Iron: " + response.labelNutrients.iron.value);
+                $("#protein").text("Protein: " + response.labelNutrients.protein.value);
+                $("#saturatedFat").text("Saturated Fat: " + response.labelNutrients.saturatedFat.value);
+                $("#sodium").text("Sodium: " + response.labelNutrients.sodium.value);
+                $("#sugars").text("Sugars: " + response.labelNutrients.sugars.value);
+                $("#transFat").text("Trans Fat: " + response.labelNutrients.transFat.value);
             });
     });
-//variable for input
-let foodInput = "spaghetti";
-let gifOffset = 0;
-let imgPage = 1;
+}
 
-function getGif() {
+function getGif(foodInput) {
     $("#gifDiv").empty()
     //object containing parameters 
     const gifQueryParams = {
@@ -75,7 +80,7 @@ function getGif() {
     })
 }
 
-function getPic() {
+function getPic(foodInput) {
 
     $("#imgDiv").empty()
 
@@ -136,10 +141,25 @@ function recipe() {
         console.log("Title: " + response.recipes[1].title);
     });
 }
+
 $(document).ready(function () {
-    getGif();
-    getPic();
-    recipe();
+
+    //search input function
+    $("#foodButton").on("click", function () {
+        event.preventDefault();
+        foodInput = $("#foodInput").val().trim();
+        if (foodInput) {
+            getGif(foodInput);
+            getPic(foodInput);
+            getNutrition(foodInput);
+        }
+        //clears food input
+        $("#foodInput").val("");
+        //resets values
+        gifOffset = 0;
+        imgPage = 1;
+
+    })
 
     //refresh gif function
     $(document).on("click", "#refreshGif", function () {
