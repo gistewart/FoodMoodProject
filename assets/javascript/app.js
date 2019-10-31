@@ -1,20 +1,23 @@
-//variable for input
-let foodInput = "spaghetti";
+//variables
 let gifOffset = 0;
 let imgPage = 1;
-//variables for nutrition input
-const data = {
-    'generalSearchInput': foodInput
-};
-const USDAurl = 'https://api.nal.usda.gov/fdc/v1/search?api_key=ZVW3xGLgjZqCbvHWwuGgXCYMKY3rXnbM3jWnLjn5';
 
-fetch(USDAurl, {
-    method: 'POST',
-    body: JSON.stringify(data),
-    headers: {
-        'Content-Type': 'application/json'
-    }
-})
+//variables for nutrition input
+
+
+function getNutrition(foodInput) {
+    let data = {
+        'generalSearchInput': foodInput
+    };
+    const USDAurl = 'https://api.nal.usda.gov/fdc/v1/search?api_key=ZVW3xGLgjZqCbvHWwuGgXCYMKY3rXnbM3jWnLjn5';
+    
+    fetch(USDAurl, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
     .then(function (response) {
         return response.json();
     })
@@ -43,9 +46,9 @@ fetch(USDAurl, {
                 $("#transFat").text("Trans Fat: " + response.labelNutrients.transFat.value);
             });
     });
+}
 
-
-function getGif() {
+function getGif(foodInput) {
     $("#gifDiv").empty()
     //object containing parameters 
     const gifQueryParams = {
@@ -77,7 +80,7 @@ function getGif() {
     })
 }
 
-function getPic() {
+function getPic(foodInput) {
 
     $("#imgDiv").empty()
 
@@ -114,35 +117,49 @@ function getPic() {
 function recipe() {
     //variable for input
     let foodrecipe = "donut";
-  
+
     //object containing parameters
     const queryPara = {
-      key: "7982d935e15cd8e88f053be3be874c94",
-      q: foodrecipe
+        key: "7982d935e15cd8e88f053be3be874c94",
+        q: foodrecipe
     };
-  
+
     //call parameters from object
     let paraString = $.param(queryPara);
     let recipeQueryURL = "https://www.food2fork.com/api/search?" + paraString;
-  
+
     $.ajax({
-      //calls giphy search
-      url: recipeQueryURL,
-      Method: "GET"
-    }).then(function(response) {
-      response = JSON.parse(response);
-  
-      console.log(response);
-  
-      console.log("Recipe: " + response.recipes[1].source_url);
-      console.log("Title: " + response.recipes[1].title);
+        //calls giphy search
+        url: recipeQueryURL,
+        Method: "GET"
+    }).then(function (response) {
+        response = JSON.parse(response);
+
+        console.log(response);
+
+        console.log("Recipe: " + response.recipes[1].source_url);
+        console.log("Title: " + response.recipes[1].title);
     });
-  }
-  
-$(document).ready(function() {
-    getGif();
-    getPic();
-    recipe();
+}
+
+$(document).ready(function () {
+
+    //search input function
+    $("#foodButton").on("click", function () {
+        event.preventDefault();
+        foodInput = $("#foodInput").val().trim();
+        if (foodInput) {
+            getGif(foodInput);
+            getPic(foodInput);
+            getNutrition(foodInput);
+        }
+        //clears food input
+        $("#foodInput").val("");
+        //resets values
+        gifOffset = 0;
+        imgPage = 1;
+
+    })
 
     //refresh gif function
     $(document).on("click", "#refreshGif", function () {
