@@ -28,18 +28,19 @@ fetch(USDAurl, {
             .then(function (response) {
                 console.log(response);
                 // Transfer content to HTML
-                $(".calcium").text("Calcium: " + response.labelNutrients.calcium.value);
-                $(".calories").text("Calories: " + response.labelNutrients.calories.value);
-                $(".carbohydrates").text("Carbohydrates: " + response.labelNutrients.carbohydrates.value);
-                $(".cholesterol").text("Cholesterol: " + response.labelNutrients.cholesterol.value);
-                $(".fat").text("Fat: " + response.labelNutrients.fat.value);
-                $(".fiber").text("Fiber: " + response.labelNutrients.fiber.value);
-                $(".iron").text("Iron: " + response.labelNutrients.iron.value);
-                $(".protein").text("Protein: " + response.labelNutrients.protein.value);
-                $(".saturatedFat").text("Saturated Fat: " + response.labelNutrients.saturatedFat.value);
-                $(".sodium").text("Sodium: " + response.labelNutrients.sodium.value);
-                $(".sugars").text("Sugars: " + response.labelNutrients.sugars.value);
-                $(".transFat").text("Trans Fat: " + response.labelNutrients.transFat.value);
+                $("#nutritionTitle").text(foodInput.toUpperCase())
+                $("#calcium").text("Calcium: " + response.labelNutrients.calcium.value);
+                $("#calories").text("Calories: " + response.labelNutrients.calories.value);
+                $("#carbohydrates").text("Carbohydrates: " + response.labelNutrients.carbohydrates.value);
+                $("#cholesterol").text("Cholesterol: " + response.labelNutrients.cholesterol.value);
+                $("#fat").text("Fat: " + response.labelNutrients.fat.value);
+                $("#fiber").text("Fiber: " + response.labelNutrients.fiber.value);
+                $("#iron").text("Iron: " + response.labelNutrients.iron.value);
+                $("#protein").text("Protein: " + response.labelNutrients.protein.value);
+                $("#saturatedFat").text("Saturated Fat: " + response.labelNutrients.saturatedFat.value);
+                $("#sodium").text("Sodium: " + response.labelNutrients.sodium.value);
+                $("#sugars").text("Sugars: " + response.labelNutrients.sugars.value);
+                $("#transFat").text("Trans Fat: " + response.labelNutrients.transFat.value);
             });
     });
 
