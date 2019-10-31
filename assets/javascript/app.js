@@ -11,17 +11,17 @@ fetch(url, {
             'Content-Type': 'application/json'
         }
     })
-    .then(function(response) {
+    .then(function (response) {
         return response.json();
     })
-    .then(function(response) {
+    .then(function (response) {
         console.log(response);
 
         fetch(`https://api.nal.usda.gov/fdc/v1/${response.foods[0].fdcId}?api_key=ZVW3xGLgjZqCbvHWwuGgXCYMKY3rXnbM3jWnLjn5`)
-            .then(function(response) {
+            .then(function (response) {
                 return response.json();
             })
-            .then(function(response) {
+            .then(function (response) {
                 console.log(response);
                 // Transfer content to HTML
                 $(".calcium").text(JSON.stringify("Calcium: " + response.labelNutrients.calcium.value));
@@ -45,7 +45,7 @@ let imgPage = 1;
 
 function getGif() {
     $("#gifDiv").empty()
-        //object containing parameters 
+    //object containing parameters 
     const gifQueryParams = {
         "api_key": "CbRv29mIUSwkTAVauYUvcQ8lOGyxCop2",
         q: foodInput,
@@ -63,7 +63,7 @@ function getGif() {
         //calls giphy search
         url: gifQueryURL,
         Method: "GET"
-    }).then(function(response) {
+    }).then(function (response) {
         console.log(response);
         //creates image div and appends to DOM
         const gifContent = "<img src=" + response.data[0].images.fixed_width.url + "/>";
@@ -92,10 +92,10 @@ function getPic() {
         //calls pexel url search
         url: imgQueryUrl,
         Method: "GET",
-        beforeSend: function(request) {
+        beforeSend: function (request) {
             request.setRequestHeader("Authorization", "563492ad6f91700001000001a0e4738780644fac9acefdba362470d6");
         },
-    }).then(function(response) {
+    }).then(function (response) {
         console.log(response);
         for (let i = 0; i < response.photos.length; i++) {
             //adds image to the DOM
@@ -112,44 +112,44 @@ function getPic() {
 function recipe() {
     //variable for input
     let foodrecipe = "donut";
-  
+
     //object containing parameters
     const queryPara = {
-      key: "7982d935e15cd8e88f053be3be874c94",
-      q: foodrecipe
+        key: "7982d935e15cd8e88f053be3be874c94",
+        q: foodrecipe
     };
-  
+
     //call parameters from object
     let paraString = $.param(queryPara);
     let recipeQueryURL = "https://www.food2fork.com/api/search?" + paraString;
-  
+
     $.ajax({
-      //calls giphy search
-      url: recipeQueryURL,
-      Method: "GET"
-    }).then(function(response) {
-      response = JSON.parse(response);
-  
-      console.log(response);
-  
-      console.log("Recipe: " + response.recipes[1].source_url);
-      console.log("Title: " + response.recipes[1].title);
+        //calls giphy search
+        url: recipeQueryURL,
+        Method: "GET"
+    }).then(function (response) {
+        response = JSON.parse(response);
+
+        console.log(response);
+
+        console.log("Recipe: " + response.recipes[1].source_url);
+        console.log("Title: " + response.recipes[1].title);
     });
-  }
-$(document).ready(function() {
+}
+$(document).ready(function () {
     getGif();
     getPic();
     recipe();
 
     //refresh gif function
-    $(document).on("click", "#refreshGif", function() {
+    $(document).on("click", "#refreshGif", function () {
         gifOffset++;
         getGif();
 
     })
 
     //refresh images function
-    $(document).on("click", "#refreshImg", function() {
+    $(document).on("click", "#refreshImg", function () {
         imgPage++;
         console.log(imgPage);
         getPic();
@@ -158,4 +158,3 @@ $(document).ready(function() {
 
 
 })
-
