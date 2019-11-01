@@ -2,15 +2,13 @@
 let gifOffset = 0;
 let imgPage = 1;
 
-//variables for nutrition input
-
-
 function getNutrition(foodInput) {
+    //variables for nutrition input
     let data = {
         'generalSearchInput': foodInput
     };
     const USDAurl = 'https://api.nal.usda.gov/fdc/v1/search?api_key=ZVW3xGLgjZqCbvHWwuGgXCYMKY3rXnbM3jWnLjn5';
-    
+
     fetch(USDAurl, {
         method: 'POST',
         body: JSON.stringify(data),
@@ -18,34 +16,34 @@ function getNutrition(foodInput) {
             'Content-Type': 'application/json'
         }
     })
-    .then(function (response) {
-        return response.json();
-    })
-    .then(function (response) {
-        console.log(response);
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (response) {
+            console.log(response);
 
-        fetch(`https://api.nal.usda.gov/fdc/v1/${response.foods[0].fdcId}?api_key=ZVW3xGLgjZqCbvHWwuGgXCYMKY3rXnbM3jWnLjn5`)
-            .then(function (response) {
-                return response.json();
-            })
-            .then(function (response) {
-                console.log(response);
-                // Transfer content to HTML
-                $("#nutritionTitle").text(foodInput.toUpperCase())
-                $("#calcium").text("Calcium: " + response.labelNutrients.calcium.value);
-                $("#calories").text("Calories: " + response.labelNutrients.calories.value);
-                $("#carbohydrates").text("Carbohydrates: " + response.labelNutrients.carbohydrates.value);
-                $("#cholesterol").text("Cholesterol: " + response.labelNutrients.cholesterol.value);
-                $("#fat").text("Fat: " + response.labelNutrients.fat.value);
-                $("#fiber").text("Fiber: " + response.labelNutrients.fiber.value);
-                $("#iron").text("Iron: " + response.labelNutrients.iron.value);
-                $("#protein").text("Protein: " + response.labelNutrients.protein.value);
-                $("#saturatedFat").text("Saturated Fat: " + response.labelNutrients.saturatedFat.value);
-                $("#sodium").text("Sodium: " + response.labelNutrients.sodium.value);
-                $("#sugars").text("Sugars: " + response.labelNutrients.sugars.value);
-                $("#transFat").text("Trans Fat: " + response.labelNutrients.transFat.value);
-            });
-    });
+            fetch(`https://api.nal.usda.gov/fdc/v1/${response.foods[0].fdcId}?api_key=ZVW3xGLgjZqCbvHWwuGgXCYMKY3rXnbM3jWnLjn5`)
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (response) {
+                    console.log(response);
+                    // Transfer content to HTML
+                    $("#nutritionTitle").text(foodInput.toUpperCase())
+                    $("#calcium").text("Calcium: " + response.labelNutrients.calcium.value);
+                    $("#calories").text("Calories: " + response.labelNutrients.calories.value);
+                    $("#carbohydrates").text("Carbohydrates: " + response.labelNutrients.carbohydrates.value);
+                    $("#cholesterol").text("Cholesterol: " + response.labelNutrients.cholesterol.value);
+                    $("#fat").text("Fat: " + response.labelNutrients.fat.value);
+                    $("#fiber").text("Fiber: " + response.labelNutrients.fiber.value);
+                    $("#iron").text("Iron: " + response.labelNutrients.iron.value);
+                    $("#protein").text("Protein: " + response.labelNutrients.protein.value);
+                    $("#saturatedFat").text("Saturated Fat: " + response.labelNutrients.saturatedFat.value);
+                    $("#sodium").text("Sodium: " + response.labelNutrients.sodium.value);
+                    $("#sugars").text("Sugars: " + response.labelNutrients.sugars.value);
+                    $("#transFat").text("Trans Fat: " + response.labelNutrients.transFat.value);
+                });
+        });
 }
 
 function getGif(foodInput) {
@@ -104,12 +102,12 @@ function getPic(foodInput) {
         console.log(response);
         for (let i = 0; i < response.photos.length; i++) {
             //adds image to the DOM
-            let imgContent = "<img src=" + response.photos[i].src.tiny + "/>";
+            let imgContent = "<div class='col-12 col-md-6 col-lg-4'><img src=" + response.photos[i].src.tiny + "/></div>";
             $("#imgDiv").append(imgContent);
         }
         //creates refresh button
         const refreshImgBtn = "<p class='refresh' id='refreshImg'>&#8635;</p>";
-        $("#imgDiv").prepend(refreshImgBtn);
+        $("#imgDivHolder").prepend(refreshImgBtn);
     })
 
 }
@@ -144,6 +142,66 @@ function recipe() {
 
 $(document).ready(function () {
 
+    //preset food input
+    $("#strawberries").on("click", function (){
+        event.preventDefault();
+        let foodInput = "strawberry"
+        getGif(foodInput);
+        getPic(foodInput);
+        getNutrition(foodInput);
+
+        //resets values
+        gifOffset = 0;
+        imgPage = 1;
+
+        //deletes refresh buttons
+        $(".refresh").remove();
+    });
+    $("#pasta").on("click", function (){
+        event.preventDefault();
+        let foodInput = "pasta"
+        getGif(foodInput);
+        getPic(foodInput);
+        getNutrition(foodInput);
+
+        //resets values
+        gifOffset = 0;
+        imgPage = 1;
+
+        //deletes refresh buttons
+        $(".refresh").remove();
+    });
+    $("#friedChicken").on("click", function (){
+        event.preventDefault();
+        let foodInput = "fried chicken"
+        getGif(foodInput);
+        getPic(foodInput);
+        getNutrition(foodInput);
+
+        //resets values
+        gifOffset = 0;
+        imgPage = 1;
+
+        //deletes refresh buttons
+        $(".refresh").remove();
+    });
+    $("#broccoli").on("click", function (){
+        event.preventDefault();
+        let foodInput = "broccoli"
+        getGif(foodInput);
+        getPic(foodInput);
+        getNutrition(foodInput);
+
+        //resets values
+        gifOffset = 0;
+        imgPage = 1;
+
+        //deletes refresh buttons
+        $(".refresh").remove();
+    });
+
+
+
     //search input function
     $("#foodButton").on("click", function () {
         event.preventDefault();
@@ -152,27 +210,33 @@ $(document).ready(function () {
             getGif(foodInput);
             getPic(foodInput);
             getNutrition(foodInput);
+
+            //resets values
+            gifOffset = 0;
+            imgPage = 1;
+
+            //deletes refresh buttons
+            $(".refresh").remove();
         }
         //clears food input
         $("#foodInput").val("");
-        //resets values
-        gifOffset = 0;
-        imgPage = 1;
 
     })
 
     //refresh gif function
     $(document).on("click", "#refreshGif", function () {
         gifOffset++;
-        getGif();
+        //deletes refresh buttons
+        $("#refreshGif").remove();
+        getGif(foodInput);
 
     })
 
     //refresh images function
     $(document).on("click", "#refreshImg", function () {
         imgPage++;
-        console.log(imgPage);
-        getPic();
+        $("#refreshImg").remove();
+        getPic(foodInput);
 
     })
 
