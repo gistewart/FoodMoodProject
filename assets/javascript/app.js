@@ -143,51 +143,9 @@ function recipe() {
 $(document).ready(function () {
 
     //preset food input
-    $("#strawberries").on("click", function (){
+    $(".preset").on("click", function (){
         event.preventDefault();
-        let foodInput = "strawberry"
-        getGif(foodInput);
-        getPic(foodInput);
-        getNutrition(foodInput);
-
-        //resets values
-        gifOffset = 0;
-        imgPage = 1;
-
-        //deletes refresh buttons
-        $(".refresh").remove();
-    });
-    $("#pasta").on("click", function (){
-        event.preventDefault();
-        let foodInput = "pasta"
-        getGif(foodInput);
-        getPic(foodInput);
-        getNutrition(foodInput);
-
-        //resets values
-        gifOffset = 0;
-        imgPage = 1;
-
-        //deletes refresh buttons
-        $(".refresh").remove();
-    });
-    $("#friedChicken").on("click", function (){
-        event.preventDefault();
-        let foodInput = "fried chicken"
-        getGif(foodInput);
-        getPic(foodInput);
-        getNutrition(foodInput);
-
-        //resets values
-        gifOffset = 0;
-        imgPage = 1;
-
-        //deletes refresh buttons
-        $(".refresh").remove();
-    });
-    $("#broccoli").on("click", function (){
-        event.preventDefault();
-        let foodInput = "broccoli"
+        let foodInput = this.id;
         getGif(foodInput);
         getPic(foodInput);
         getNutrition(foodInput);
