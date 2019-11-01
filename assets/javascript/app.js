@@ -48,6 +48,7 @@ function getNutrition(foodInput) {
 
 function getGif(foodInput) {
     $("#gifDiv").empty()
+    $("#gifDivHolder").show();
     //object containing parameters 
     const gifQueryParams = {
         "api_key": "CbRv29mIUSwkTAVauYUvcQ8lOGyxCop2",
@@ -102,7 +103,7 @@ function getPic(foodInput) {
         console.log(response);
         for (let i = 0; i < response.photos.length; i++) {
             //adds image to the DOM
-            let imgContent = "<div class='col-12 col-md-6 col-lg-4'><img src=" + response.photos[i].src.tiny + "/></div>";
+            let imgContent = "<div class='col-12 col-md-6 col-lg-4'><div class='text-center'><img class='hvr-glow' src=" + response.photos[i].src.tiny + "/></div></div>";
             $("#imgDiv").append(imgContent);
         }
         //creates refresh button
@@ -142,6 +143,8 @@ function recipe() {
 
 $(document).ready(function () {
 
+    $("#gifDivHolder").hide();
+
     //search input function
     $("#foodButton").on("click", function () {
         event.preventDefault();
@@ -160,9 +163,6 @@ $(document).ready(function () {
         }
         //clears food input
         $("#foodInput").val("");
-
-
-
 
     })
 
