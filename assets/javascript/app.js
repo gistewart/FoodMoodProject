@@ -169,8 +169,6 @@ function recipe() {
   });
 }
 
-// ** Why is there a document.ready here?
-$(document).ready(function() {
   //search input function
   $("#foodButton").on("click", function() {
     event.preventDefault();
@@ -191,7 +189,23 @@ $(document).ready(function() {
     }
     //clears food input
     $("#foodInput").val("");
-  });
+  }); 
+
+  //preset food input
+  $(".preset").on("click", function (){
+    event.preventDefault();
+    let foodInput = this.id;
+    getGif(foodInput);
+    getPic(foodInput);
+    getNutrition(foodInput);
+
+    //resets values
+    gifOffset = 0;
+    imgPage = 1;
+
+    //deletes refresh buttons
+    $(".refresh").remove();
+});
 
   //refresh gif function
   $(document).on("click", "#refreshGif", function() {
@@ -207,25 +221,3 @@ $(document).ready(function() {
     $("#refreshImg").remove();
     getPic(foodInput);
   });
-
-  // ** Why is there a document.ready here? (there's another one above on line 172)
-  $(document).ready(function() {
-    getGif();
-    getPic();
-    recipe();
-
-    // ** This (lines 218-229) is a duplicate of above (lines 196-209)
-    //refresh gif function
-    $(document).on("click", "#refreshGif", function() {
-      gifOffset++;
-      getGif();
-    });
-
-    //refresh images function
-    $(document).on("click", "#refreshImg", function() {
-      imgPage++;
-      console.log(imgPage);
-      getPic();
-    });
-  });
-});
