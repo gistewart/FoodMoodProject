@@ -113,8 +113,11 @@ function getPic(foodInput) {
         url: imgQueryUrl,
         Method: "GET",
         beforeSend: function (request) {
-            request.setRequestHeader("Authorization", "563492ad6f91700001000001a0e4738780644fac9acefdba362470d6");
-        },
+            request.setRequestHeader(
+                "Authorization",
+                "563492ad6f91700001000001a0e4738780644fac9acefdba362470d6"
+            );
+        }
     }).then(function (response) {
         console.log(response);
         for (let i = 0; i < response.photos.length; i++) {
@@ -164,6 +167,7 @@ function recipe() {
     });
 }
 
+
 function stopStartGif() {
     //grabs image source attribute
     let imageURL = $(this).attr("src");
@@ -179,10 +183,27 @@ function stopStartGif() {
 
 }
 
+
 $(document).ready(function () {
 
     $("#gifDivHolder").hide();
 
+    //preset food input
+    $(".preset").on("click", function () {
+        event.preventDefault();
+        let foodInput = this.id;
+        getGif(foodInput);
+        getPic(foodInput);
+        getNutrition(foodInput);
+
+        //resets values
+        gifOffset = 0;
+        imgPage = 1;
+
+        //deletes refresh buttons
+        $(".refresh").remove();
+    });
+    
     //search input function
     $("#foodButton").on("click", function () {
         event.preventDefault();
@@ -204,13 +225,13 @@ $(document).ready(function () {
 
     })
 
-        //refresh gif function
-        $(document).on("click", "#refreshGif", function () {
-            gifOffset++;
-            getGif();
-        });
+    //refresh gif function
+    $(document).on("click", "#refreshGif", function () {
+        gifOffset++;
+        getGif();
+    });
 
-        //refresh images function
+    //refresh images function
     $(document).on("click", "#refreshImg", function () {
         imgPage++;
         $("#refreshImg").remove();

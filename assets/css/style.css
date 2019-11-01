@@ -16,6 +16,12 @@
     text-align: right;
 }
 
+body {
+    width: 80%;
+    margin: 0 auto;
+}
+
+
 .container{
     overflow:auto;
 }
