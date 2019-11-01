@@ -32,6 +32,11 @@ body {
     margin-bottom: 1em;
 }
 
+footer {
+  background-color: #333333;
+  color: white;
+}
+
 #gifDivHolder{
     float:right;
     padding: .5em;
