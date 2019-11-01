@@ -103,7 +103,7 @@ function getPic(foodInput) {
         console.log(response);
         for (let i = 0; i < response.photos.length; i++) {
             //adds image to the DOM
-            let imgContent = "<div class='col-12 col-md-6 col-lg-4'><div class='text-center'><img class='hvr-glow' src=" + response.photos[i].src.tiny + "/></div></div>";
+            const imgContent = `<div class='col-12 col-md-6 col-lg-4'><div class='text-center'><a href="${response.photos[i].url}"><img class='hvr-glow' src="${response.photos[i].src.tiny}"/></a></div></div>`;
             $("#imgDiv").append(imgContent);
         }
         //creates refresh button
