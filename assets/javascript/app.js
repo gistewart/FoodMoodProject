@@ -141,6 +141,21 @@ function recipe() {
     });
 }
 
+function stopStartGif() {
+    //grabs image source attribute
+    let imageURL = $(this).attr("src");
+    //amends image url to either still or active version
+    if (imageURL.includes("200w_s")) {
+        imageURL = imageURL.replace(/200w_s/g, "200w");
+    }
+    else {
+        imageURL = imageURL.replace(/200w/g, "200w_s")
+    }
+    //changes attribute in the DOM
+    $(this).attr("src", imageURL)
+
+}
+
 $(document).ready(function () {
 
     $("#gifDivHolder").hide();
@@ -182,6 +197,9 @@ $(document).ready(function () {
         getPic(foodInput);
 
     })
+
+    //runs stops and starts gif on user click
+    $(document).on("click", "#gifDiv img", stopStartGif)
 
 
 })
