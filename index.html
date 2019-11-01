@@ -2,14 +2,13 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <!-- Links to bootstrap and css file-->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
-  <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
-  <title>Food Mood</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!-- Links to bootstrap and css file-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+    <title>Food Mood</title>
 </head>
 
 <body>
@@ -25,20 +24,93 @@
 
     <div id="imgDiv"></div>
     <div id="gifDiv"></div>
+
+
     <div id="nutDiv">
-        <h1 id="nutritionTitle"></h1>
-        <div class="nutritionStats" id="calories"></div>
-        <div class="nutritionStats" id="calcium"></div>
-        <div class="nutritionStats" id="carbohydrates"></div>
-        <div class="nutritionStats" id="cholesterol"></div>
-        <div class="nutritionStats" id="fat"></div>
-        <div class="nutritionStats" id="fiber"></div>
-        <div class="nutritionStats" id="iron"></div>
-        <div class="nutritionStats" id="protein"></div>
-        <div class="nutritionStats" id="saturatedFat"></div>
-        <div class="nutritionStats" id="sodium"></div>
-        <div class="nutritionStats" id="sugars"></div>
-        <div class="nutritionStats" id="transFat"></div></div>
+        <div class="container table table-bordered">
+            <div class="row">
+                <div class="col-12">
+                    <h3>Nutrition Facts</h3>
+                </div>
+            </div>
+
+            <style>
+                .serving-size {
+                    border-bottom: 15px solid black;
+                    margin: 0px;
+                }
+            </style>
+
+            <div class="row serving-size">
+                <div class="col-8">
+                    Serving size
+                </div>
+                <div class="col-4" id="servingSize">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-8">
+                    <h3>Calories</h3>
+                </div>
+                <div class="col-4" id="calories">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-8 stdLabel">
+                    Total Fat
+                </div>
+                <div class="col-4" id="fatText">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-8 stdLabel">
+                    Cholesterol
+                </div>
+                <div class="col-4" id="cholesterolText">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-8 stdLabel">
+                    Sodium
+                </div>
+                <div class="col-4" id="sodiumText">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-8 stdLabel">
+                    Carbohydrates
+                </div>
+                <div class="col-4" id="carbohydrateText">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-8 stdLabel">
+                    Fiber
+                </div>
+                <div class="col-4" id="fiberText">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-8 stdLabel">
+                    Protein
+                </div>
+                <div class="col-4" id="proteinText">
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <!-- <h1 id="nutritionTitle"></h1> -->
+
+
     <div id="recipeDiv"></div>
 
     <!-- Links to jquery and javascript file -->
