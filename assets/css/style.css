@@ -2,11 +2,47 @@
     cursor: pointer;
 }
 
-#nutDiv,
-.stdLabel {
+#nutDiv .stdLabel {
     color: grey;
 }
 
 #nutDiv {
-    margin-top: 10px;
+    margin: 20px;
+    width: 220px;
+    border: 3px solid black;
+}
+
+#nutDiv .serving-size {
+    border-bottom: 10px solid black;
+    font-size: 12px;
+}
+
+#nutDiv .header {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 800;
+    border-bottom: 2px solid black;
+    height: 35px;
+}
+
+#nutDiv .amtPerServing {
+    font-size: 10px;
+}
+
+#nutDiv .calLabel {
+    font-size: 24px;
+    padding-bottom: 3px;
+    line-height: 0.9;
+}
+
+#nutDiv .calories {
+    border-bottom: 1px solid black;
+    height: 40px;
+}
+
+#nutDiv #calAmt {
+    font-size: 30px;
+    font-weight: 800;
+    /* display: flex;
+    align-items: flex-end; */
 }

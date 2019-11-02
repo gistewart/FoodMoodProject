@@ -23,37 +23,34 @@
     </div>
 
     <div id="imgDiv"></div>
-    <div id="gifDiv"></div>
+    <!-- <div id="gifDiv"></div> -->
 
 
     <div id="nutDiv">
-        <div class="container table table-bordered">
-            <div class="row">
+        <div class="container">
+
+            <div class="row header">
                 <div class="col-12">
-                    <h3>Nutrition Facts</h3>
+                    Nutrition Facts
                 </div>
             </div>
-
-            <style>
-                .serving-size {
-                    border-bottom: 15px solid black;
-                    margin: 0px;
-                }
-            </style>
 
             <div class="row serving-size">
-                <div class="col-8">
+                <div class="col-6">
                     Serving size
                 </div>
-                <div class="col-4" id="servingSize">
+                <div class="col-6 nutVal" id="servingSize">
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-8">
-                    <h3>Calories</h3>
+            <div class="row calories">
+                <div class="col-7 amtPerServing">
+                    Amount per serving
+                    <div class="row">
+                        <div class="col-12 calLabel">Calories</div>
+                    </div>
                 </div>
-                <div class="col-4" id="calories">
+                <div class="col-5 text-right" id="calAmt">
                 </div>
             </div>
 
@@ -61,7 +58,7 @@
                 <div class="col-8 stdLabel">
                     Total Fat
                 </div>
-                <div class="col-4" id="fatText">
+                <div class="col-4 text-right" id="fatText">
                 </div>
             </div>
 
@@ -69,15 +66,15 @@
                 <div class="col-8 stdLabel">
                     Cholesterol
                 </div>
-                <div class="col-4" id="cholesterolText">
+                <div class="col-4 text-right" id="cholesterolText">
                 </div>
             </div>
 
             <div class="row">
-                <div class="col-8 stdLabel">
+                <div class="col-6 stdLabel">
                     Sodium
                 </div>
-                <div class="col-4" id="sodiumText">
+                <div class="col-6 text-right" id="sodiumText">
                 </div>
             </div>
 
@@ -85,7 +82,7 @@
                 <div class="col-8 stdLabel">
                     Carbohydrates
                 </div>
-                <div class="col-4" id="carbohydrateText">
+                <div class="col-4 text-right" id="carbohydrateText">
                 </div>
             </div>
 
@@ -93,7 +90,7 @@
                 <div class="col-8 stdLabel">
                     Fiber
                 </div>
-                <div class="col-4" id="fiberText">
+                <div class="col-4 text-right" id="fiberText">
                 </div>
             </div>
 
@@ -101,10 +98,9 @@
                 <div class="col-8 stdLabel">
                     Protein
                 </div>
-                <div class="col-4" id="proteinText">
+                <div class="col-4 text-right" id="proteinText">
                 </div>
             </div>
-
         </div>
 
     </div>

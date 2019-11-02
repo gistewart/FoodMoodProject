@@ -32,7 +32,7 @@ fetch(USDAurl, {
 
                 $("#servingSize").text(response.householdServingFullText.toLowerCase() + "  (" + response.servingSize + response.servingSizeUnit + ")");
 
-                $("#calories").html("<h3>" + parseInt(response.labelNutrients.calories.value) + "<h3>");
+                $("#calAmt").html(parseInt(response.labelNutrients.calories.value));
 
                 $("#fatText").text(parseInt(response.foodNutrients[5].amount) + response.foodNutrients[5].nutrient.unitName);
 
