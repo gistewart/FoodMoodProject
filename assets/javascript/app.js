@@ -1,11 +1,53 @@
-//variable for input
-let foodInput = "donut";
-let gifOffset = 0;
-let imgPage = 1;
-//variables for nutrition input
+let foodInput = "chocolate";
+let foodID = ""
 const data = {
     'generalSearchInput': foodInput
 };
+
+$.ajax({
+    "async": true,
+    "crossDomain": true,
+    "url": "https://api.nutritionix.com/v1_1/search/" + foodInput + "?results=0%3A20&cal_min=0&cal_max=50000&fields=item_name%2Cbrand_name%2Citem_id%2Cbrand_id&appId=21fc5346&appKey=ced84d9b86a8143034b8ede11feaf534",
+    "method": "GET"
+})
+
+.then(function(response) {
+    console.log(response);
+    console.log(response.hits[0].fields.item_id);
+    foodID = response.hits[0].fields.item_id;
+})
+
+.then(function(response) {
+    $.ajax({
+            "async": true,
+            "crossDomain": true,
+            "url": "https://api.nutritionix.com/v1_1/item?id=" + foodID + "&appId=21fc5346&appKey=ced84d9b86a8143034b8ede11feaf534",
+            "method": "GET"
+        })
+        .then(function(response) {
+            console.log(response)
+            $("#servingSizeAmt").text(response.nf_serving_size_qty + " " + response.nf_serving_size_unit + " (" + parseInt(response.nf_serving_weight_grams) + "g)");
+            $("#calAmt").text(parseInt(response.nf_calories));
+            $("#fatAmt").text(parseInt(response.usda_fields.FAT.value) + response.usda_fields.FAT.uom);
+            $("#cholesterolAmt").text(parseInt(response.usda_fields.CHOLE.value) + response.usda_fields.CHOLE.uom);
+            $("#sodiumAmt").text(parseInt(response.usda_fields.NA.value) + response.usda_fields.NA.uom);
+            $("#carbohydrateAmt").text(parseInt(response.usda_fields.CHOCDF.value) + response.usda_fields.CHOCDF.uom);
+            $("#fiberAmt").text(parseInt(response.usda_fields.FIBTG.value) + response.usda_fields.FIBTG.uom);
+            $("#proteinAmt").text(parseInt(response.usda_fields.PROCNT.value) + response.usda_fields.PROCNT.uom);
+        })
+})
+
+
+
+// ----------------------------------------------------------
+//variable for input
+// let foodInput = "strawberry";
+let gifOffset = 0;
+let imgPage = 1;
+//variables for nutrition input
+// const data = {
+// 'generalSearchInput': foodInput
+// };
 const USDAurl = 'https://api.nal.usda.gov/fdc/v1/search?api_key=ZVW3xGLgjZqCbvHWwuGgXCYMKY3rXnbM3jWnLjn5';
 
 fetch(USDAurl, {
@@ -30,11 +72,7 @@ fetch(USDAurl, {
                 // Transfer content to HTML
 
 
-                $("#servingSize").text(response.householdServingFullText.toLowerCase() + "  (" + response.servingSize + response.servingSizeUnit + ")");
 
-                $("#calAmt").html(parseInt(response.labelNutrients.calories.value));
-
-                $("#fatText").text(parseInt(response.foodNutrients[5].amount) + response.foodNutrients[5].nutrient.unitName);
 
                 $("#cholesterolText").text(parseInt(response.foodNutrients[11].amount) + response.foodNutrients[11].nutrient.unitName)
 

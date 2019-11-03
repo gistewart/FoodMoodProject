@@ -2,27 +2,64 @@
     cursor: pointer;
 }
 
-#nutDiv .stdLabel {
-    color: grey;
-}
-
 #nutDiv {
     margin: 20px;
     width: 220px;
-    border: 3px solid black;
 }
 
-#nutDiv .serving-size {
-    border-bottom: 10px solid black;
-    font-size: 12px;
+#nutDiv .container {
+    box-sizing: content-box;
+    padding-right: 5px !important;
+    padding-left: 5px !important;
+    border: 3px solid black;
 }
 
 #nutDiv .header {
     text-align: center;
     font-size: 24px;
     font-weight: 800;
-    border-bottom: 2px solid black;
     height: 35px;
+}
+
+#nutDiv .header:after {
+    content: "";
+    display: block;
+    margin: 0 auto;
+    width: 220px;
+    border-bottom: 1px solid black;
+}
+
+#nutDiv .serving-size {
+    font-size: 12px;
+    padding: 3px 0px;
+}
+
+#nutDiv .serving-size:after {
+    content: "";
+    display: block;
+    margin: 0 auto;
+    width: 220px;
+    border-bottom: 10px solid black;
+}
+
+#nutDiv .servingSizeLabel {
+    padding-right: 0px;
+}
+
+#nutDiv #servingSize {
+    padding-left: 0px;
+}
+
+#nutDiv .calories {
+    height: 40px;
+}
+
+#nutDiv .calories:after {
+    content: "";
+    display: block;
+    margin: 0 auto;
+    width: 220px;
+    border-bottom: 2px solid black;
 }
 
 #nutDiv .amtPerServing {
@@ -31,18 +68,16 @@
 
 #nutDiv .calLabel {
     font-size: 24px;
-    padding-bottom: 3px;
     line-height: 0.9;
-}
-
-#nutDiv .calories {
-    border-bottom: 1px solid black;
-    height: 40px;
 }
 
 #nutDiv #calAmt {
     font-size: 30px;
     font-weight: 800;
-    /* display: flex;
-    align-items: flex-end; */
+}
+
+#nutDiv .details {
+    padding-top: 8px;
+    color: grey;
+    font-size: 15px;
 }
