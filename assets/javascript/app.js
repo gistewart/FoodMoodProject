@@ -11,12 +11,12 @@ function getNutrition(foodInput) {
         "https://api.nal.usda.gov/fdc/v1/search?api_key=ZVW3xGLgjZqCbvHWwuGgXCYMKY3rXnbM3jWnLjn5";
 
     fetch(USDAurl, {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: {
-            "Content-Type": "application/json"
-        }
-    })
+            method: "POST",
+            body: JSON.stringify(data),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
         .then(function (response) {
             return response.json();
         })
@@ -24,8 +24,8 @@ function getNutrition(foodInput) {
             console.log(response);
 
             fetch(
-                `https://api.nal.usda.gov/fdc/v1/${response.foods[0].fdcId}?api_key=ZVW3xGLgjZqCbvHWwuGgXCYMKY3rXnbM3jWnLjn5`
-            )
+                    `https://api.nal.usda.gov/fdc/v1/${response.foods[0].fdcId}?api_key=ZVW3xGLgjZqCbvHWwuGgXCYMKY3rXnbM3jWnLjn5`
+                )
                 .then(function (response) {
                     return response.json();
                 })
@@ -132,7 +132,7 @@ function getPic(foodInput) {
 
 }
 
-function recipe() {
+function recipe(foodInput) {
     //variable for input
     let foodrecipe = foodInput;
 
@@ -174,8 +174,7 @@ function stopStartGif() {
     //amends image url to either still or active version
     if (imageURL.includes("200w_s")) {
         imageURL = imageURL.replace(/200w_s/g, "200w");
-    }
-    else {
+    } else {
         imageURL = imageURL.replace(/200w/g, "200w_s")
     }
     //changes attribute in the DOM
@@ -203,7 +202,7 @@ $(document).ready(function () {
         //deletes refresh buttons
         $(".refresh").remove();
     });
-    
+
     //search input function
     $("#foodButton").on("click", function () {
         event.preventDefault();
@@ -244,4 +243,3 @@ $(document).ready(function () {
 
 
 })
-
