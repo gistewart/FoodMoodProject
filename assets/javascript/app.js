@@ -1,6 +1,3 @@
-//variable for input
-let foodInput = "pasta";
-
 //----------------------------------------------------------
 //beginning of nutrution query
 //variables for nutrition input
@@ -258,9 +255,6 @@ function restaurantAPICall(cuisineId) {
     });
 }
 
-
-
-
 function getHeadline(foodInput) {
 
     $("#headlines").empty();
@@ -288,10 +282,7 @@ function getHeadline(foodInput) {
             articleLink = `<h3>LATEST NEWS: <a href="${response.response.docs[i].web_url}">${response.response.docs[i].headline.main}</a></h3>`
 
             $("#headlines").append(articleLink);
-
         }
-
-
     })
 }
 
