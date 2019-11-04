@@ -31,7 +31,7 @@ function getNutrition(foodInput) {
                     return response.json();
                 })
                 .then(function (response) {
-                    console.log(response);
+                    console.log("nutrition: " + response);
                     // Transfer content to HTML
                     $("#nutritionTitle").text(foodInput.toUpperCase());
                     $("#calcium").text(
@@ -86,7 +86,7 @@ function getGif(foodInput) {
         url: gifQueryURL,
         Method: "GET"
     }).then(function (response) {
-        console.log(response);
+        console.log("gif: " + response);
         //creates image div and appends to DOM
         const gifContent = "<img src=" + response.data[0].images.fixed_width.url + "/>";
         $("#gifDiv").append(gifContent);
@@ -120,7 +120,7 @@ function getPic(foodInput) {
             );
         }
     }).then(function (response) {
-        console.log(response);
+        console.log("pic: " + response);
         for (let i = 0; i < response.photos.length; i++) {
             //adds image to the DOM
             const imgContent = `<div class='col-12 col-md-6 col-lg-4'><div class='text-center'><a href="${response.photos[i].url}"><img class='hvr-glow' src="${response.photos[i].src.tiny}"/></a></div></div>`;
@@ -154,7 +154,7 @@ function recipe(foodInput) {
     }).then(function (response) {
         response = JSON.parse(response);
 
-        console.log(response);
+        console.log("recipe: " + response);
 
         // console.log("Recipe: " + response.recipes[1].source_url);
         // console.log("Title: " + response.recipes[1].title);
@@ -190,7 +190,7 @@ function getHeadline(foodInput) {
         method: "GET"
     }).then(function (response) {
 
-        console.log(response);
+        console.log("news: " + response);
 
         for (let i = 0; i < limit; i++) {
 
