@@ -1,8 +1,14 @@
-let foodInput = "chocolate";
+//variable for input
+let foodInput = "pasta";
+
+//----------------------------------------------------------
+//beginning of nutrution query
+//variables for nutrition input
 let foodID = ""
 const data = {
     'generalSearchInput': foodInput
 };
+let usda_check = "";
 
 $.ajax({
     "async": true,
@@ -28,134 +34,30 @@ $.ajax({
             console.log(response)
             $("#servingSizeAmt").text(response.nf_serving_size_qty + " " + response.nf_serving_size_unit + " (" + parseInt(response.nf_serving_weight_grams) + "g)");
             $("#calAmt").text(parseInt(response.nf_calories));
-            $("#fatAmt").text(parseInt(response.usda_fields.FAT.value) + response.usda_fields.FAT.uom);
-            $("#cholesterolAmt").text(parseInt(response.usda_fields.CHOLE.value) + response.usda_fields.CHOLE.uom);
-            $("#sodiumAmt").text(parseInt(response.usda_fields.NA.value) + response.usda_fields.NA.uom);
-            $("#carbohydrateAmt").text(parseInt(response.usda_fields.CHOCDF.value) + response.usda_fields.CHOCDF.uom);
-            $("#fiberAmt").text(parseInt(response.usda_fields.FIBTG.value) + response.usda_fields.FIBTG.uom);
-            $("#proteinAmt").text(parseInt(response.usda_fields.PROCNT.value) + response.usda_fields.PROCNT.uom);
+            console.log("usda info: " + response.usda_fields)
+            if (response.usda_fields === null) {
+                $("#fatAmt").text(parseInt(response.nf_total_fat) + "g");
+                $("#cholesterolAmt").text(parseInt(response.nf_cholesterol) + "mg");
+                $("#sodiumAmt").text(parseInt(response.nf_sodium) + "mg");
+                $("#carbohydrateAmt").text(parseInt(response.nf_total_carbohydrate) + "g");
+                $("#fiberAmt").text(parseInt(response.nf_dietary_fiber) + "g");
+                $("#proteinAmt").text(parseInt(response.nf_protein) + "g");
+            } else {
+                $("#fatAmt").text(parseInt(response.usda_fields.FAT.value) + response.usda_fields.FAT.uom);
+                $("#cholesterolAmt").text(parseInt(response.usda_fields.CHOLE.value) + response.usda_fields.CHOLE.uom);
+                $("#sodiumAmt").text(parseInt(response.usda_fields.NA.value) + response.usda_fields.NA.uom);
+                $("#carbohydrateAmt").text(parseInt(response.usda_fields.CHOCDF.value) + response.usda_fields.CHOCDF.uom);
+                $("#fiberAmt").text(parseInt(response.usda_fields.FIBTG.value) + response.usda_fields.FIBTG.uom);
+                $("#proteinAmt").text(parseInt(response.usda_fields.PROCNT.value) + response.usda_fields.PROCNT.uom);
+            }
         })
 })
 
+// end of nutrition query
+//----------------------------------------------------------
 
-
-// ----------------------------------------------------------
-//variable for input
-// let foodInput = "strawberry";
 let gifOffset = 0;
 let imgPage = 1;
-//variables for nutrition input
-// const data = {
-// 'generalSearchInput': foodInput
-// };
-const USDAurl = 'https://api.nal.usda.gov/fdc/v1/search?api_key=ZVW3xGLgjZqCbvHWwuGgXCYMKY3rXnbM3jWnLjn5';
-
-fetch(USDAurl, {
-        method: 'POST',
-        body: JSON.stringify(data),
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-    .then(function(response) {
-        return response.json();
-    })
-    .then(function(response) {
-        console.log(response);
-
-        fetch(`https://api.nal.usda.gov/fdc/v1/${response.foods[0].fdcId}?api_key=ZVW3xGLgjZqCbvHWwuGgXCYMKY3rXnbM3jWnLjn5`)
-            .then(function(response) {
-                return response.json();
-            })
-            .then(function(response) {
-                console.log(response);
-                // Transfer content to HTML
-
-
-
-
-                $("#cholesterolText").text(parseInt(response.foodNutrients[11].amount) + response.foodNutrients[11].nutrient.unitName)
-
-                $("#sodiumText").text(parseInt(response.foodNutrients[10].amount) + response.foodNutrients[10].nutrient.unitName)
-
-                $("#carbohydrateText").text(parseInt(response.foodNutrients[6].amount) + response.foodNutrients[6].nutrient.unitName)
-
-                $("#fiberText").text(parseInt(response.foodNutrients[9].amount) + response.foodNutrients[9].nutrient.unitName)
-
-                $("#proteinText").text(parseInt(response.foodNutrients[4].amount) + response.foodNutrients[4].nutrient.unitName)
-
-                $("#carbohydrates").text("Carbohydrates: " + response.labelNutrients.carbohydrates.value);
-                $("#cholesterol").text("Cholesterol: " + response.labelNutrients.cholesterol.value);
-                $("#fat").text("Fat: " + response.labelNutrients.fat.value);
-                $("#fiber").text("Fiber: " + response.labelNutrients.fiber.value);
-                $("#iron").text("Iron: " + response.labelNutrients.iron.value);
-                $("#protein").text("Protein: " + response.labelNutrients.protein.value);
-                $("#saturatedFat").text("Saturated Fat: " + response.labelNutrients.saturatedFat.value);
-                $("#sodium").text("Sodium: " + response.labelNutrients.sodium.value);
-                $("#sugars").text("Sugars: " + response.labelNutrients.sugars.value);
-                $("#transFat").text("Trans Fat: " + response.labelNutrients.transFat.value);
-
-                console.log(response.foodNutrients[0].nutrient.name);
-                console.log(response.foodNutrients[0].amount);
-                console.log(response.foodNutrients[0].nutrient.unitName);
-
-                console.log(response.foodNutrients[1].nutrient.name);
-                // $("#calcium").text("Calcium: " + response.labelNutrients.calcium.value);
-                console.log(response.labelNutrients.calcium.value);
-                console.log(response.foodNutrients[1].amount);
-                console.log(response.foodNutrients[1].nutrient.unitName);
-
-                console.log(response.foodNutrients[2].nutrient.name);
-                console.log(response.foodNutrients[2].amount);
-                console.log(response.foodNutrients[2].nutrient.unitName);
-
-                console.log(response.foodNutrients[3].nutrient.name);
-                console.log(response.foodNutrients[3].amount);
-                console.log(response.foodNutrients[3].nutrient.unitName);
-
-                console.log(response.foodNutrients[4].nutrient.name);
-                console.log(response.foodNutrients[4].amount);
-                console.log(response.foodNutrients[4].nutrient.unitName);
-
-                console.log(response.foodNutrients[5].nutrient.name);
-                console.log(response.foodNutrients[5].amount);
-                console.log(response.foodNutrients[5].nutrient.unitName);
-
-                console.log(response.foodNutrients[6].nutrient.name);
-                console.log(response.foodNutrients[6].amount);
-                console.log(response.foodNutrients[6].nutrient.unitName);
-
-                console.log(response.foodNutrients[7].nutrient.name);
-                console.log(response.foodNutrients[7].amount);
-                console.log(response.foodNutrients[7].nutrient.unitName);
-
-                console.log(response.foodNutrients[8].nutrient.name);
-                console.log(response.foodNutrients[8].amount);
-                console.log(response.foodNutrients[8].nutrient.unitName);
-
-                console.log(response.foodNutrients[9].nutrient.name);
-                console.log(response.foodNutrients[9].amount);
-                console.log(response.foodNutrients[9].nutrient.unitName);
-
-                console.log(response.foodNutrients[10].nutrient.name);
-                console.log(response.foodNutrients[10].amount);
-                console.log(response.foodNutrients[10].nutrient.unitName);
-
-                console.log(response.foodNutrients[11].nutrient.name);
-                console.log(response.foodNutrients[11].amount);
-                console.log(response.foodNutrients[11].nutrient.unitName);
-
-                console.log(response.foodNutrients[12].nutrient.name);
-                console.log(response.foodNutrients[12].amount);
-                console.log(response.foodNutrients[12].nutrient.unitName);
-
-                console.log(response.foodNutrients[13].nutrient.name);
-                console.log(response.foodNutrients[13].amount);
-                console.log(response.foodNutrients[13].nutrient.unitName);
-
-            });
-    });
-
 
 function getGif() {
     $("#gifDiv").empty()
@@ -237,18 +139,18 @@ function recipe() {
     let paraString = $.param(queryPara);
     let recipeQueryURL = "https://www.food2fork.com/api/search?" + paraString;
 
-    $.ajax({
-        //calls giphy search
-        url: recipeQueryURL,
-        Method: "GET"
-    }).then(function(response) {
-        response = JSON.parse(response);
+    // $.ajax({
+    //     //calls giphy search
+    //     url: recipeQueryURL,
+    //     Method: "GET"
+    // }).then(function(response) {
+    //     response = JSON.parse(response);
 
-        console.log(response);
+    //     console.log(response);
 
-        console.log("Recipe: " + response.recipes[1].source_url);
-        console.log("Title: " + response.recipes[1].title);
-    });
+    //     console.log("Recipe: " + response.recipes[1].source_url);
+    //     console.log("Title: " + response.recipes[1].title);
+    // });
 }
 
 $(document).ready(function() {
