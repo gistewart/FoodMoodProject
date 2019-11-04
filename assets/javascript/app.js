@@ -169,6 +169,100 @@ function recipe() {
   });
 }
 
+let lat;
+let long;
+
+navigator.geolocation.getCurrentPosition(function(position) {
+  // console.log(position.coords.latitude);
+  // console.log(position.coords.longitude);
+
+  lat = position.coords.latitude;
+  long = position.coords.longitude;
+
+  cuisineAPICall();
+  // restaurantAPICall();
+
+  // const location = position;
+});
+
+function cuisineAPICall() {
+  const ApiKey = "de972d173dd44d03623092703cd67ba8";
+
+  const cuisineQueryURL =
+    "https://developers.zomato.com/api/v2.1/cuisines?lat=" +
+    lat +
+    "&lon=" +
+    long;
+
+  $.ajax({
+    //calls giphy search
+    url: cuisineQueryURL,
+    method: "GET",
+    headers: {
+      "user-key": ApiKey
+    }
+  }).then(function(response) {
+    // response = JSON.parse(response);
+
+    //   console.log(response.cuisines);
+
+    let id;
+
+    const arr = response.cuisines;
+
+    for (let i = 0; i < arr.length; i++) {
+      // console.log(arr[i].cuisine);
+      const food = foodInput.toLowerCase();
+      const cuisine = arr[i].cuisine.cuisine_name.toLowerCase();
+
+      // console.log(food, cuisine);
+
+      if (cuisine === food) {
+        id = arr[i].cuisine.cuisine_id;
+      }
+    }
+    //   console.log("id", id);
+    restaurantAPICall(id);
+  });
+}
+
+function restaurantAPICall(cuisineId) {
+  const ApiKey = "de972d173dd44d03623092703cd67ba8";
+
+  const restarauntQueryURL =
+    "https://developers.zomato.com/api/v2.1/search?lat=" +
+    lat +
+    "&lon=" +
+    long +
+    "&cuisines=" +
+    cuisineId;
+
+  $.ajax({
+    //calls giphy search
+    url: restarauntQueryURL,
+    method: "GET",
+    headers: {
+      "user-key": ApiKey
+    }
+  }).then(function(response) {
+    // response = JSON.parse(response);
+
+    for (let i = 0; i < response.restaurants.length; i++) {
+      console.log(response.restaurants[i].restaurant.name);
+      console.log(response.restaurants[i].restaurant.phone_numbers);
+
+      const restname = $("<p>").text(
+        "Restaraunt Name:" + response.restaurants[i].restaurant.name
+      );
+      const restnumber = $("<p>").text(
+        "Restaraunt Number:" + response.restaurants[i].restaurant.phone_numbers
+      );
+
+      $("#restdiv").append(restname, restnumber);
+    }
+  });
+}
+
 // ** Why is there a document.ready here?
 $(document).ready(function() {
   //search input function
