@@ -24,8 +24,9 @@ function getNutrition(foodInput) {
     })
 
         .then(function (response) {
-            console.log("nutrition: " + response);
-            console.log("foodID: " + response.hits[0].fields.item_id);
+            console.log("nutrition + food ID:");
+            console.log(response);
+            console.log(response.hits[0].fields.item_id);
             foodID = response.hits[0].fields.item_id;
         })
 
@@ -37,10 +38,11 @@ function getNutrition(foodInput) {
                 "method": "GET"
             })
                 .then(function (response) {
-                    console.log("nutrients: " + response)
+                    console.log("nutrients + usdainfo:");
+                    console.log(response)
                     $("#servingSizeAmt").text(response.nf_serving_size_qty + " " + response.nf_serving_size_unit + " (" + parseInt(response.nf_serving_weight_grams) + "g)");
                     $("#calAmt").text(parseInt(response.nf_calories));
-                    console.log("usda info: " + response.usda_fields)
+                    console.log(response.usda_fields)
                     if (response.usda_fields === null) {
                         $("#fatAmt").text(parseInt(response.nf_total_fat) + "g");
                         $("#cholesterolAmt").text(parseInt(response.nf_cholesterol) + "mg");
@@ -85,7 +87,8 @@ function getGif(foodInput) {
         url: gifQueryURL,
         Method: "GET"
     }).then(function (response) {
-        console.log("gif: " + response);
+        console.log("gif:");
+        console.log(response);
         //creates image div and appends to DOM
         const gifContent = "<img src=" + response.data[0].images.fixed_width.url + "/>";
         $("#gifDiv").append(gifContent);
@@ -120,7 +123,8 @@ function getPic(foodInput) {
             );
         }
     }).then(function (response) {
-        console.log("pic: " + response);
+        console.log("pic:");
+        console.log(response);
         for (let i = 0; i < response.photos.length; i++) {
             //adds image to the DOM
             const imgContent = `<div class='col-12 col-md-6 col-lg-4'><div class='text-center'><a href="${response.photos[i].url}"><img class='hvr-glow' src="${response.photos[i].src.tiny}"/></a></div></div>`;
@@ -342,17 +346,9 @@ function stopStartGif() {
 
 }
 
+function runApis(foodInput) {
 
-$(document).ready(function () {
-
-    $("#gifDivHolder").hide();
-    $("#headlines").hide();
-    $("#imgDivHolder").hide();
-
-    //preset food input
-    $(".preset").on("click", function () {
-        event.preventDefault();
-        foodInput = this.id;
+    if (foodInput) {
         getGif(foodInput);
         getPic(foodInput);
         getNutrition(foodInput);
@@ -366,30 +362,31 @@ $(document).ready(function () {
         //deletes refresh buttons
         $(".refresh").remove();
         $("#refreshImg").remove();
+    }
+    //clears food input
+    $("#foodInput").val("");
+
+}
+
+
+$(document).ready(function () {
+
+    $("#gifDivHolder").hide();
+    $("#headlines").hide();
+    $("#imgDivHolder").hide();
+
+    //preset food input
+    $(".preset").on("click", function () {
+        event.preventDefault();
+        foodInput = this.id;
+        runApis(foodInput);
     });
 
     //search input function
     $("#foodButton").on("click", function () {
         event.preventDefault();
         foodInput = $("#foodInput").val().trim();
-        if (foodInput) {
-            getGif(foodInput);
-            getPic(foodInput);
-            getNutrition(foodInput);
-            //recipe(foodInput);
-
-            //resets values
-            gifOffset = 0;
-            imgPage = 1;
-            recidx = 0;
-
-            //deletes refresh buttons
-            $(".refresh").remove();
-            $("#refreshImg").remove();
-        }
-        //clears food input
-        $("#foodInput").val("");
-
+        runApis(foodInput);
     });
 
     //refresh gif function
