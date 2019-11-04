@@ -229,8 +229,6 @@ function restaurantAPICall(cuisineId) {
         "&cuisines=" +
         cuisineId;
 
-<<<<<<< HEAD
-=======
     $.ajax({
         //calls giphy search
         url: restarauntQueryURL,
@@ -257,7 +255,6 @@ function restaurantAPICall(cuisineId) {
     });
 }
 
->>>>>>> b70049381e40c1455011963e3b054c8272e7f530
 function getHeadline(foodInput) {
 
     $("#headlines").empty();
@@ -303,12 +300,8 @@ function stopStartGif() {
 
 }
 
-<<<<<<< HEAD
-$(document).ready(function () {
-=======
 
 $(document).ready(function() {
->>>>>>> b70049381e40c1455011963e3b054c8272e7f530
 
     $("#gifDivHolder").hide();
 
