@@ -6,69 +6,66 @@ let foodInput = "";
 let nytResponse = {};
 
 function getNutrition(foodInput) {
+
+    //----------------------------------------------------------
+    //beginning of nutrution query
     //variables for nutrition input
-    let data = {
-        generalSearchInput: foodInput
+    let foodID = ""
+    const data = {
+        'generalSearchInput': foodInput
     };
-    const USDAurl =
-        "https://api.nal.usda.gov/fdc/v1/search?api_key=ZVW3xGLgjZqCbvHWwuGgXCYMKY3rXnbM3jWnLjn5";
+    let usda_check = "";
 
-    fetch(USDAurl, {
-            method: "POST",
-            body: JSON.stringify(data),
-            headers: {
-                "Content-Type": "application/json"
-            }
-        })
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (response) {
-            console.log("nutrition: " + response);
+    $.ajax({
+        "async": true,
+        "crossDomain": true,
+        "url": "https://api.nutritionix.com/v1_1/search/" + foodInput + "?results=0%3A20&cal_min=0&cal_max=50000&fields=item_name%2Cbrand_name%2Citem_id%2Cbrand_id&appId=21fc5346&appKey=ced84d9b86a8143034b8ede11feaf534",
+        "method": "GET"
+    })
 
-            fetch(
-                    `https://api.nal.usda.gov/fdc/v1/${response.foods[0].fdcId}?api_key=ZVW3xGLgjZqCbvHWwuGgXCYMKY3rXnbM3jWnLjn5`
-                )
+        .then(function (response) {
+            console.log(response);
+            console.log(response.hits[0].fields.item_id);
+            foodID = response.hits[0].fields.item_id;
+        })
+
+        .then(function (response) {
+            $.ajax({
+                "async": true,
+                "crossDomain": true,
+                "url": "https://api.nutritionix.com/v1_1/item?id=" + foodID + "&appId=21fc5346&appKey=ced84d9b86a8143034b8ede11feaf534",
+                "method": "GET"
+            })
                 .then(function (response) {
-                    return response.json();
+                    console.log(response)
+                    $("#servingSizeAmt").text(response.nf_serving_size_qty + " " + response.nf_serving_size_unit + " (" + parseInt(response.nf_serving_weight_grams) + "g)");
+                    $("#calAmt").text(parseInt(response.nf_calories));
+                    console.log("usda info: " + response.usda_fields)
+                    if (response.usda_fields === null) {
+                        $("#fatAmt").text(parseInt(response.nf_total_fat) + "g");
+                        $("#cholesterolAmt").text(parseInt(response.nf_cholesterol) + "mg");
+                        $("#sodiumAmt").text(parseInt(response.nf_sodium) + "mg");
+                        $("#carbohydrateAmt").text(parseInt(response.nf_total_carbohydrate) + "g");
+                        $("#fiberAmt").text(parseInt(response.nf_dietary_fiber) + "g");
+                        $("#proteinAmt").text(parseInt(response.nf_protein) + "g");
+                    } else {
+                        $("#fatAmt").text(parseInt(response.usda_fields.FAT.value) + response.usda_fields.FAT.uom);
+                        $("#cholesterolAmt").text(parseInt(response.usda_fields.CHOLE.value) + response.usda_fields.CHOLE.uom);
+                        $("#sodiumAmt").text(parseInt(response.usda_fields.NA.value) + response.usda_fields.NA.uom);
+                        $("#carbohydrateAmt").text(parseInt(response.usda_fields.CHOCDF.value) + response.usda_fields.CHOCDF.uom);
+                        $("#fiberAmt").text(parseInt(response.usda_fields.FIBTG.value) + response.usda_fields.FIBTG.uom);
+                        $("#proteinAmt").text(parseInt(response.usda_fields.PROCNT.value) + response.usda_fields.PROCNT.uom);
+                    }
                 })
-                .then(function (response) {
-                    console.log("nutrition: " + response);
-                    // Transfer content to HTML
-                    $("#nutritionTitle").text(foodInput.toUpperCase());
-                    $("#calcium").text(
-                        "Calcium: " + response.labelNutrients.calcium.value
-                    );
-                    $("#calories").text(
-                        "Calories: " + response.labelNutrients.calories.value
-                    );
-                    $("#carbohydrates").text(
-                        "Carbohydrates: " + response.labelNutrients.carbohydrates.value
-                    );
-                    $("#cholesterol").text(
-                        "Cholesterol: " + response.labelNutrients.cholesterol.value
-                    );
-                    $("#fat").text("Fat: " + response.labelNutrients.fat.value);
-                    $("#fiber").text("Fiber: " + response.labelNutrients.fiber.value);
-                    $("#iron").text("Iron: " + response.labelNutrients.iron.value);
-                    $("#protein").text(
-                        "Protein: " + response.labelNutrients.protein.value
-                    );
-                    $("#saturatedFat").text(
-                        "Saturated Fat: " + response.labelNutrients.saturatedFat.value
-                    );
-                    $("#sodium").text("Sodium: " + response.labelNutrients.sodium.value);
-                    $("#sugars").text("Sugars: " + response.labelNutrients.sugars.value);
-                    $("#transFat").text(
-                        "Trans Fat: " + response.labelNutrients.transFat.value
-                    );
-                });
-        });
+        })
+    // end of nutrition query
+    //----------------------------------------------------------
 }
 
 function getGif(foodInput) {
-    $("#gifDiv").empty()
-    $("#gifDivHolder").show();
+    $("#gifDiv").empty() <<
+
+        $("#gifDivHolder").show();
     //object containing parameters 
     const gifQueryParams = {
         "api_key": "CbRv29mIUSwkTAVauYUvcQ8lOGyxCop2",
@@ -174,95 +171,95 @@ function recipe(foodInput) {
 let lat;
 let long;
 
-navigator.geolocation.getCurrentPosition(function(position) {
-  // console.log(position.coords.latitude);
-  // console.log(position.coords.longitude);
+navigator.geolocation.getCurrentPosition(function (position) {
+    // console.log(position.coords.latitude);
+    // console.log(position.coords.longitude);
 
-  lat = position.coords.latitude;
-  long = position.coords.longitude;
+    lat = position.coords.latitude;
+    long = position.coords.longitude;
 
-  cuisineAPICall();
-  // restaurantAPICall();
+    cuisineAPICall();
+    // restaurantAPICall();
 
-  // const location = position;
+    // const location = position;
 });
 
 function cuisineAPICall() {
-  const ApiKey = "de972d173dd44d03623092703cd67ba8";
+    const ApiKey = "de972d173dd44d03623092703cd67ba8";
 
-  const cuisineQueryURL =
-    "https://developers.zomato.com/api/v2.1/cuisines?lat=" +
-    lat +
-    "&lon=" +
-    long;
+    const cuisineQueryURL =
+        "https://developers.zomato.com/api/v2.1/cuisines?lat=" +
+        lat +
+        "&lon=" +
+        long;
 
-  $.ajax({
-    //calls giphy search
-    url: cuisineQueryURL,
-    method: "GET",
-    headers: {
-      "user-key": ApiKey
-    }
-  }).then(function(response) {
-    // response = JSON.parse(response);
+    $.ajax({
+        //calls giphy search
+        url: cuisineQueryURL,
+        method: "GET",
+        headers: {
+            "user-key": ApiKey
+        }
+    }).then(function (response) {
+        // response = JSON.parse(response);
 
-    //   console.log(response.cuisines);
+        //   console.log(response.cuisines);
 
-    let id;
+        let id;
 
-    const arr = response.cuisines;
+        const arr = response.cuisines;
 
-    for (let i = 0; i < arr.length; i++) {
-      // console.log(arr[i].cuisine);
-      const food = foodInput.toLowerCase();
-      const cuisine = arr[i].cuisine.cuisine_name.toLowerCase();
+        for (let i = 0; i < arr.length; i++) {
+            // console.log(arr[i].cuisine);
+            const food = foodInput.toLowerCase();
+            const cuisine = arr[i].cuisine.cuisine_name.toLowerCase();
 
-      // console.log(food, cuisine);
+            // console.log(food, cuisine);
 
-      if (cuisine === food) {
-        id = arr[i].cuisine.cuisine_id;
-      }
-    }
-    //   console.log("id", id);
-    restaurantAPICall(id);
-  });
+            if (cuisine === food) {
+                id = arr[i].cuisine.cuisine_id;
+            }
+        }
+        //   console.log("id", id);
+        restaurantAPICall(id);
+    });
 }
 
 function restaurantAPICall(cuisineId) {
-  const ApiKey = "de972d173dd44d03623092703cd67ba8";
+    const ApiKey = "de972d173dd44d03623092703cd67ba8";
 
-  const restarauntQueryURL =
-    "https://developers.zomato.com/api/v2.1/search?lat=" +
-    lat +
-    "&lon=" +
-    long +
-    "&cuisines=" +
-    cuisineId;
+    const restarauntQueryURL =
+        "https://developers.zomato.com/api/v2.1/search?lat=" +
+        lat +
+        "&lon=" +
+        long +
+        "&cuisines=" +
+        cuisineId;
 
-  $.ajax({
-    //calls giphy search
-    url: restarauntQueryURL,
-    method: "GET",
-    headers: {
-      "user-key": ApiKey
-    }
-  }).then(function(response) {
-    // response = JSON.parse(response);
+    $.ajax({
+        //calls giphy search
+        url: restarauntQueryURL,
+        method: "GET",
+        headers: {
+            "user-key": ApiKey
+        }
+    }).then(function (response) {
+        // response = JSON.parse(response);
 
-    for (let i = 0; i < response.restaurants.length; i++) {
-      console.log(response.restaurants[i].restaurant.name);
-      console.log(response.restaurants[i].restaurant.phone_numbers);
+        for (let i = 0; i < response.restaurants.length; i++) {
+            console.log(response.restaurants[i].restaurant.name);
+            console.log(response.restaurants[i].restaurant.phone_numbers);
 
-      const restname = $("<p>").text(
-        "Restaraunt Name:" + response.restaurants[i].restaurant.name
-      );
-      const restnumber = $("<p>").text(
-        "Restaraunt Number:" + response.restaurants[i].restaurant.phone_numbers
-      );
+            const restname = $("<p>").text(
+                "Restaraunt Name:" + response.restaurants[i].restaurant.name
+            );
+            const restnumber = $("<p>").text(
+                "Restaraunt Number:" + response.restaurants[i].restaurant.phone_numbers
+            );
 
-      $("#restdiv").append(restname, restnumber);
-    }
-  });
+            $("#restdiv").append(restname, restnumber);
+        }
+    });
 }
 
 function getHeadline(foodInput) {
@@ -320,6 +317,7 @@ function refreshHeadline() {
     const refreshNewsBtn = "<p class='refresh' id='refreshArticle'>&#8635;</p>";
     $("#headlines").prepend(refreshNewsBtn);
 
+
 }
 
 function stopStartGif() {
@@ -335,6 +333,7 @@ function stopStartGif() {
     $(this).attr("src", imageURL)
 
 }
+
 
 $(document).ready(function () {
 
@@ -405,6 +404,5 @@ $(document).ready(function () {
 
     //runs stops and starts gif on user click
     $(document).on("click", "#gifDiv img", stopStartGif)
-
 
 })
