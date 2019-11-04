@@ -1,7 +1,9 @@
 //variables
 let gifOffset = 0;
 let imgPage = 1;
+let nyti = 0;
 let foodInput = "";
+let nytResponse = {};
 
 function getNutrition(foodInput) {
     //variables for nutrition input
@@ -99,6 +101,7 @@ function getGif(foodInput) {
 
 function getPic(foodInput) {
     $("#imgDiv").empty();
+    $("#imgDivHolder").show();
 
     const imgQueryParams = {
         query: foodInput,
@@ -171,12 +174,11 @@ function recipe() {
 function getHeadline(foodInput) {
 
     $("#headlines").empty();
-
-    let limit = 1;
+    $("#headlines").show();
 
     const queryParams = {
         q: foodInput,
-        document_type: "recipe",
+        fq: 'document_type:("recipe")',
         "api-key": "4T4JAn6PPSJW7c7RpRNUgAK4qSQQxGio"
     };
 
@@ -192,17 +194,38 @@ function getHeadline(foodInput) {
     }).then(function (response) {
 
         console.log(response);
+        nytResponse = response;
 
-        for (let i = 0; i < limit; i++) {
-
-            articleLink = `<h3>RECIPE: <a href="${response.response.docs[i].web_url}">${response.response.docs[i].headline.main}</a></h3>`
-
-            $("#headlines").append(articleLink);
-
-        }
-
+        articleLink = `<h3>RECIPE: <a href="${response.response.docs[nyti].web_url}">${response.response.docs[nyti].headline.main}</a></h3>`
+        $("#headlines").append(articleLink);
+        //creates refresh button
+        const refreshNewsBtn = "<p class='refresh' id='refreshArticle'>&#8635;</p>";
+        $("#headlines").prepend(refreshNewsBtn);
 
     })
+
+
+}
+
+function refreshHeadline() {
+
+    //runs through response array
+    if (nyti < 9) {
+        nyti++;
+    } else {
+        nyti = 0;
+    }
+
+    //empties div and adds new headline
+    $("#refreshArticle").remove();
+    $("#headlines").empty();
+    articleLink = `<h3>RECIPE: <a href="${nytResponse.response.docs[nyti].web_url}">${nytResponse.response.docs[nyti].headline.main}</a></h3>`
+    $("#headlines").append(articleLink);
+
+    //creates refresh button
+    const refreshNewsBtn = "<p class='refresh' id='refreshArticle'>&#8635;</p>";
+    $("#headlines").prepend(refreshNewsBtn);
+
 }
 
 function stopStartGif() {
@@ -220,10 +243,11 @@ function stopStartGif() {
 
 }
 
-
 $(document).ready(function () {
 
     $("#gifDivHolder").hide();
+    $("#headlines").hide();
+    $("#imgDivHolder").hide();
 
     //preset food input
     $(".preset").on("click", function () {
@@ -237,6 +261,7 @@ $(document).ready(function () {
         //resets values
         gifOffset = 0;
         imgPage = 1;
+        nyti = 0;
 
         //deletes refresh buttons
         $(".refresh").remove();
@@ -276,6 +301,11 @@ $(document).ready(function () {
         $("#refreshImg").remove();
         getPic(foodInput);
 
+    })
+
+    //refresh article function
+    $(document).on("click", "#refreshArticle", function () {
+        refreshHeadline();
     })
 
     //runs stops and starts gif on user click
