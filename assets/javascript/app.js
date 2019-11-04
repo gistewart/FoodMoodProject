@@ -24,8 +24,8 @@ function getNutrition(foodInput) {
     })
 
         .then(function (response) {
-            console.log(response);
-            console.log(response.hits[0].fields.item_id);
+            console.log("nutrition: " + response);
+            console.log("foodID: " + response.hits[0].fields.item_id);
             foodID = response.hits[0].fields.item_id;
         })
 
@@ -37,7 +37,7 @@ function getNutrition(foodInput) {
                 "method": "GET"
             })
                 .then(function (response) {
-                    console.log(response)
+                    console.log("nutrients: " + response)
                     $("#servingSizeAmt").text(response.nf_serving_size_qty + " " + response.nf_serving_size_unit + " (" + parseInt(response.nf_serving_weight_grams) + "g)");
                     $("#calAmt").text(parseInt(response.nf_calories));
                     console.log("usda info: " + response.usda_fields)
