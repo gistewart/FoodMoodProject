@@ -1,9 +1,9 @@
 //variables
 let gifOffset = 0;
 let imgPage = 1;
-let nyti = 0;
+let recidx = 0;
 let foodInput = "";
-let nytResponse = {};
+let recipeObj = {};
 
 function getNutrition(foodInput) {
 
@@ -134,13 +134,14 @@ function getPic(foodInput) {
 }
 
 function recipe(foodInput) {
-    //variable for input
-    let foodrecipe = foodInput;
+
+    $("#headlines").empty();
+    $("#headlines").show();
 
     //object containing parameters
     const queryPara = {
         key: "7982d935e15cd8e88f053be3be874c94",
-        q: foodrecipe
+        q: foodInput
     };
 
     //call parameters from object
@@ -154,17 +155,24 @@ function recipe(foodInput) {
     }).then(function (response) {
         response = JSON.parse(response);
 
-        console.log("recipe: " + response);
+        console.log(response);
+        recipeObj = response;
 
         // console.log("Recipe: " + response.recipes[1].source_url);
         // console.log("Title: " + response.recipes[1].title);
+        // const title = $("<p>").text("Title: " + response.recipes[1].title);
+        // const recipe = $("<a>")
+        //     .text("Link to Recipe")
+        //     .attr("href", response.recipes[1].source_url)
+        //     .attr("target", "_blank");
+        // $("#recipeDiv").append(title, recipe);
 
-        const title = $("<p>").text("Title: " + response.recipes[1].title);
-        const recipe = $("<a>")
-            .text("Link to Recipe")
-            .attr("href", response.recipes[1].source_url)
-            .attr("target", "_blank");
-        $("#recipeDiv").append(title, recipe);
+        recipeTitle = `<h3>RECIPE: <a href="${response.recipes[recidx].source_url}">${response.recipes[recidx].title}</a></h3>`
+        $("#headlines").append(recipeTitle);
+
+        //creates refresh button
+        const refreshNewsBtn = "<p class='refresh' id='refreshArticle'>&#8635;</p>";
+        $("#headlines").prepend(refreshNewsBtn);
     });
 }
 
@@ -262,56 +270,56 @@ function restaurantAPICall(cuisineId) {
     });
 }
 
-function getHeadline(foodInput) {
+// function getHeadline(foodInput) {
 
-    $("#headlines").empty();
-    $("#headlines").show();
+//     $("#headlines").empty();
+//     $("#headlines").show();
 
-    const queryParams = {
-        q: foodInput,
-        fq: 'document_type:("recipe")',
-        "api-key": "4T4JAn6PPSJW7c7RpRNUgAK4qSQQxGio"
-    };
+//     const queryParams = {
+//         q: foodInput,
+//         fq: 'document_type:("recipe")',
+//         "api-key": "4T4JAn6PPSJW7c7RpRNUgAK4qSQQxGio"
+//     };
 
-    const paramString = $.param(queryParams);
+//     const paramString = $.param(queryParams);
 
-    const queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?" + paramString;
+//     const queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?" + paramString;
 
-    console.log(queryURL);
+//     console.log(queryURL);
 
-    $.ajax({
-        url: queryURL,
-        method: "GET"
-    }).then(function (response) {
+//     $.ajax({
+//         url: queryURL,
+//         method: "GET"
+//     }).then(function (response) {
 
-        console.log(response);
-        nytResponse = response;
+//         console.log(response);
+//         nytResponse = response;
 
-        articleLink = `<h3>RECIPE: <a href="${response.response.docs[nyti].web_url}">${response.response.docs[nyti].headline.main}</a></h3>`
-        $("#headlines").append(articleLink);
-        //creates refresh button
-        const refreshNewsBtn = "<p class='refresh' id='refreshArticle'>&#8635;</p>";
-        $("#headlines").prepend(refreshNewsBtn);
+//         articleLink = `<h3>RECIPE: <a href="${response.response.docs[recidx].web_url}">${response.response.docs[recidx].headline.main}</a></h3>`
+//         $("#headlines").append(articleLink);
+//         //creates refresh button
+//         const refreshNewsBtn = "<p class='refresh' id='refreshArticle'>&#8635;</p>";
+//         $("#headlines").prepend(refreshNewsBtn);
 
-    })
+//     })
 
 
-}
+// }
 
-function refreshHeadline() {
+function refreshRecipe() {
 
     //runs through response array
-    if (nyti < 9) {
-        nyti++;
+    if (recidx < 29) {
+        recidx++;
     } else {
-        nyti = 0;
+        recidx = 0;
     }
 
     //empties div and adds new headline
     $("#refreshArticle").remove();
     $("#headlines").empty();
-    articleLink = `<h3>RECIPE: <a href="${nytResponse.response.docs[nyti].web_url}">${nytResponse.response.docs[nyti].headline.main}</a></h3>`
-    $("#headlines").append(articleLink);
+    recipeTitle = `<h3>RECIPE: <a href="${recipeObj.recipes[recidx].source_url}">${recipeObj.recipes[recidx].title}</a></h3>`
+    $("#headlines").append(recipeTitle);
 
     //creates refresh button
     const refreshNewsBtn = "<p class='refresh' id='refreshArticle'>&#8635;</p>";
@@ -348,16 +356,16 @@ $(document).ready(function () {
         getGif(foodInput);
         getPic(foodInput);
         getNutrition(foodInput);
-        getHeadline(foodInput);
         //recipe(foodInput);
 
         //resets values
         gifOffset = 0;
         imgPage = 1;
-        nyti = 0;
+        recidx = 0;
 
         //deletes refresh buttons
         $(".refresh").remove();
+        $("#refreshImg").remove();
     });
 
     //search input function
@@ -368,15 +376,16 @@ $(document).ready(function () {
             getGif(foodInput);
             getPic(foodInput);
             getNutrition(foodInput);
-            getHeadline(foodInput);
-            recipe(foodInput);
+            //recipe(foodInput);
 
             //resets values
             gifOffset = 0;
             imgPage = 1;
+            recidx = 0;
 
             //deletes refresh buttons
             $(".refresh").remove();
+            $("#refreshImg").remove();
         }
         //clears food input
         $("#foodInput").val("");
@@ -399,7 +408,7 @@ $(document).ready(function () {
 
     //refresh article function
     $(document).on("click", "#refreshArticle", function () {
-        refreshHeadline();
+        refreshRecipe();
     })
 
     //runs stops and starts gif on user click
