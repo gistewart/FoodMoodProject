@@ -12,8 +12,88 @@
     cursor: pointer;
     margin: 0;
     font-size: 28px;
-    color:whitesmoke;
+    color: whitesmoke;
     text-align: right;
+}
+
+#nutDiv {
+    margin: 20px;
+    width: 220px;
+}
+
+#nutDiv .container {
+    box-sizing: content-box;
+    padding-right: 5px !important;
+    padding-left: 5px !important;
+    border: 3px solid black;
+}
+
+#nutDiv .header {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 800;
+    height: 35px;
+}
+
+#nutDiv .header:after {
+    content: "";
+    display: block;
+    margin: 0 auto;
+    width: 220px;
+    border-bottom: 1px solid black;
+}
+
+#nutDiv .serving-size {
+    font-size: 12px;
+    padding: 3px 0px;
+}
+
+#nutDiv .serving-size:after {
+    content: "";
+    display: block;
+    margin: 0 auto;
+    width: 220px;
+    border-bottom: 10px solid black;
+}
+
+#nutDiv .servingSizeLabel {
+    padding-right: 0px;
+}
+
+#nutDiv #servingSize {
+    padding-left: 0px;
+}
+
+#nutDiv .calories {
+    height: 40px;
+}
+
+#nutDiv .calories:after {
+    content: "";
+    display: block;
+    margin: 0 auto;
+    width: 220px;
+    border-bottom: 2px solid black;
+}
+
+#nutDiv .amtPerServing {
+    font-size: 10px;
+}
+
+#nutDiv .calLabel {
+    font-size: 24px;
+    line-height: 0.9;
+}
+
+#nutDiv #calAmt {
+    font-size: 30px;
+    font-weight: 800;
+}
+
+#nutDiv .details {
+    padding-top: 8px;
+    color: grey;
+    font-size: 15px;
 }
 
 body {
@@ -21,36 +101,40 @@ body {
     margin: 0 auto;
 }
 
-.container{
-    overflow:auto;
+.container {
+    overflow: auto;
 }
 
-#imgDivHolder, #gifDivHolder{
+#imgDivHolder,
+#gifDivHolder {
     border-radius: 16px;
     background-color: #333333;
     margin-bottom: 1em;
 }
 
 footer {
-  background-color: #333333;
-  color: white;
-  padding: .5em;
-}
-
-#gifDivHolder{
-    float:right;
+    background-color: #333333;
+    color: white;
     padding: .5em;
 }
 
-#imgDiv img, #gifDiv img{
+#gifDivHolder {
+    float: right;
+    padding: .5em;
+}
+
+#imgDiv img,
+#gifDiv img {
     margin-bottom: 1.5em;
 }
 
 .presets {
-  margin-bottom: .75em;
+    margin-bottom: .75em;
 }
 
+
 /* Glow */
+
 .hvr-glow {
     display: inline-block;
     vertical-align: middle;
@@ -61,12 +145,17 @@ footer {
     transition-duration: 0.3s;
     -webkit-transition-property: box-shadow;
     transition-property: box-shadow;
-  }
-  .hvr-glow:hover, .hvr-glow:focus, .hvr-glow:active {
+}
+
+.hvr-glow:hover,
+.hvr-glow:focus,
+.hvr-glow:active {
     box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
-  }
+}
+
 
 /* Grow */
+
 .hvr-grow {
     display: inline-block;
     vertical-align: middle;
@@ -77,10 +166,14 @@ footer {
     transition-duration: 0.3s;
     -webkit-transition-property: transform;
     transition-property: transform;
-  }
-  .hvr-grow:hover, .hvr-grow:focus, .hvr-grow:active {
+}
+
+.hvr-grow:hover,
+.hvr-grow:focus,
+.hvr-grow:active {
     -webkit-transform: scale(1.1);
     transform: scale(1.1);
-  }
+}
+
 
 /* preset image & label */
