@@ -1,60 +1,66 @@
-//----------------------------------------------------------
-//beginning of nutrution query
-//variables for nutrition input
-let foodID = ""
-const data = {
-    'generalSearchInput': foodInput
-};
-let usda_check = "";
-
-$.ajax({
-    "async": true,
-    "crossDomain": true,
-    "url": "https://api.nutritionix.com/v1_1/search/" + foodInput + "?results=0%3A20&cal_min=0&cal_max=50000&fields=item_name%2Cbrand_name%2Citem_id%2Cbrand_id&appId=21fc5346&appKey=ced84d9b86a8143034b8ede11feaf534",
-    "method": "GET"
-})
-
-.then(function(response) {
-    console.log(response);
-    console.log(response.hits[0].fields.item_id);
-    foodID = response.hits[0].fields.item_id;
-})
-
-.then(function(response) {
-    $.ajax({
-            "async": true,
-            "crossDomain": true,
-            "url": "https://api.nutritionix.com/v1_1/item?id=" + foodID + "&appId=21fc5346&appKey=ced84d9b86a8143034b8ede11feaf534",
-            "method": "GET"
-        })
-        .then(function(response) {
-            console.log(response)
-            $("#servingSizeAmt").text(response.nf_serving_size_qty + " " + response.nf_serving_size_unit + " (" + parseInt(response.nf_serving_weight_grams) + "g)");
-            $("#calAmt").text(parseInt(response.nf_calories));
-            console.log("usda info: " + response.usda_fields)
-            if (response.usda_fields === null) {
-                $("#fatAmt").text(parseInt(response.nf_total_fat) + "g");
-                $("#cholesterolAmt").text(parseInt(response.nf_cholesterol) + "mg");
-                $("#sodiumAmt").text(parseInt(response.nf_sodium) + "mg");
-                $("#carbohydrateAmt").text(parseInt(response.nf_total_carbohydrate) + "g");
-                $("#fiberAmt").text(parseInt(response.nf_dietary_fiber) + "g");
-                $("#proteinAmt").text(parseInt(response.nf_protein) + "g");
-            } else {
-                $("#fatAmt").text(parseInt(response.usda_fields.FAT.value) + response.usda_fields.FAT.uom);
-                $("#cholesterolAmt").text(parseInt(response.usda_fields.CHOLE.value) + response.usda_fields.CHOLE.uom);
-                $("#sodiumAmt").text(parseInt(response.usda_fields.NA.value) + response.usda_fields.NA.uom);
-                $("#carbohydrateAmt").text(parseInt(response.usda_fields.CHOCDF.value) + response.usda_fields.CHOCDF.uom);
-                $("#fiberAmt").text(parseInt(response.usda_fields.FIBTG.value) + response.usda_fields.FIBTG.uom);
-                $("#proteinAmt").text(parseInt(response.usda_fields.PROCNT.value) + response.usda_fields.PROCNT.uom);
-            }
-        })
-})
-
-// end of nutrition query
-//----------------------------------------------------------
-
+//variables
 let gifOffset = 0;
 let imgPage = 1;
+let nyti = 0;
+let foodInput = "";
+let nytResponse = {};
+
+function getNutrition(foodInput) {
+
+    //----------------------------------------------------------
+    //beginning of nutrution query
+    //variables for nutrition input
+    let foodID = ""
+    const data = {
+        'generalSearchInput': foodInput
+    };
+    let usda_check = "";
+
+    $.ajax({
+        "async": true,
+        "crossDomain": true,
+        "url": "https://api.nutritionix.com/v1_1/search/" + foodInput + "?results=0%3A20&cal_min=0&cal_max=50000&fields=item_name%2Cbrand_name%2Citem_id%2Cbrand_id&appId=21fc5346&appKey=ced84d9b86a8143034b8ede11feaf534",
+        "method": "GET"
+    })
+
+        .then(function (response) {
+            console.log("nutrition: " + response);
+            console.log("foodID: " + response.hits[0].fields.item_id);
+            foodID = response.hits[0].fields.item_id;
+        })
+
+        .then(function (response) {
+            $.ajax({
+                "async": true,
+                "crossDomain": true,
+                "url": "https://api.nutritionix.com/v1_1/item?id=" + foodID + "&appId=21fc5346&appKey=ced84d9b86a8143034b8ede11feaf534",
+                "method": "GET"
+            })
+                .then(function (response) {
+                    console.log("nutrients: " + response)
+                    $("#servingSizeAmt").text(response.nf_serving_size_qty + " " + response.nf_serving_size_unit + " (" + parseInt(response.nf_serving_weight_grams) + "g)");
+                    $("#calAmt").text(parseInt(response.nf_calories));
+                    console.log("usda info: " + response.usda_fields)
+                    if (response.usda_fields === null) {
+                        $("#fatAmt").text(parseInt(response.nf_total_fat) + "g");
+                        $("#cholesterolAmt").text(parseInt(response.nf_cholesterol) + "mg");
+                        $("#sodiumAmt").text(parseInt(response.nf_sodium) + "mg");
+                        $("#carbohydrateAmt").text(parseInt(response.nf_total_carbohydrate) + "g");
+                        $("#fiberAmt").text(parseInt(response.nf_dietary_fiber) + "g");
+                        $("#proteinAmt").text(parseInt(response.nf_protein) + "g");
+                    } else {
+                        $("#fatAmt").text(parseInt(response.usda_fields.FAT.value) + response.usda_fields.FAT.uom);
+                        $("#cholesterolAmt").text(parseInt(response.usda_fields.CHOLE.value) + response.usda_fields.CHOLE.uom);
+                        $("#sodiumAmt").text(parseInt(response.usda_fields.NA.value) + response.usda_fields.NA.uom);
+                        $("#carbohydrateAmt").text(parseInt(response.usda_fields.CHOCDF.value) + response.usda_fields.CHOCDF.uom);
+                        $("#fiberAmt").text(parseInt(response.usda_fields.FIBTG.value) + response.usda_fields.FIBTG.uom);
+                        $("#proteinAmt").text(parseInt(response.usda_fields.PROCNT.value) + response.usda_fields.PROCNT.uom);
+                    }
+                })
+        })
+    // end of nutrition query
+    //----------------------------------------------------------
+}
 
 function getGif(foodInput) {
     $("#gifDiv").empty() <<
@@ -78,7 +84,7 @@ function getGif(foodInput) {
         //calls giphy search
         url: gifQueryURL,
         Method: "GET"
-    }).then(function(response) {
+    }).then(function (response) {
         console.log("gif: " + response);
         //creates image div and appends to DOM
         const gifContent = "<img src=" + response.data[0].images.fixed_width.url + "/>";
@@ -92,6 +98,7 @@ function getGif(foodInput) {
 
 function getPic(foodInput) {
     $("#imgDiv").empty();
+    $("#imgDivHolder").show();
 
     const imgQueryParams = {
         query: foodInput,
@@ -106,13 +113,13 @@ function getPic(foodInput) {
         //calls pexel url search
         url: imgQueryUrl,
         Method: "GET",
-        beforeSend: function(request) {
+        beforeSend: function (request) {
             request.setRequestHeader(
                 "Authorization",
                 "563492ad6f91700001000001a0e4738780644fac9acefdba362470d6"
             );
         }
-    }).then(function(response) {
+    }).then(function (response) {
         console.log("pic: " + response);
         for (let i = 0; i < response.photos.length; i++) {
             //adds image to the DOM
@@ -144,7 +151,7 @@ function recipe(foodInput) {
         //calls giphy search
         url: recipeQueryURL,
         Method: "GET"
-    }).then(function(response) {
+    }).then(function (response) {
         response = JSON.parse(response);
 
         console.log("recipe: " + response);
@@ -164,7 +171,7 @@ function recipe(foodInput) {
 let lat;
 let long;
 
-navigator.geolocation.getCurrentPosition(function(position) {
+navigator.geolocation.getCurrentPosition(function (position) {
     // console.log(position.coords.latitude);
     // console.log(position.coords.longitude);
 
@@ -193,7 +200,7 @@ function cuisineAPICall() {
         headers: {
             "user-key": ApiKey
         }
-    }).then(function(response) {
+    }).then(function (response) {
         // response = JSON.parse(response);
 
         //   console.log(response.cuisines);
@@ -236,7 +243,7 @@ function restaurantAPICall(cuisineId) {
         headers: {
             "user-key": ApiKey
         }
-    }).then(function(response) {
+    }).then(function (response) {
         // response = JSON.parse(response);
 
         for (let i = 0; i < response.restaurants.length; i++) {
@@ -258,11 +265,11 @@ function restaurantAPICall(cuisineId) {
 function getHeadline(foodInput) {
 
     $("#headlines").empty();
-
-    let limit = 1;
+    $("#headlines").show();
 
     const queryParams = {
-        q: "food+" + foodInput,
+        q: foodInput,
+        fq: 'document_type:("recipe")',
         "api-key": "4T4JAn6PPSJW7c7RpRNUgAK4qSQQxGio"
     };
 
@@ -270,20 +277,47 @@ function getHeadline(foodInput) {
 
     const queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?" + paramString;
 
+    console.log(queryURL);
+
     $.ajax({
         url: queryURL,
         method: "GET"
-    }).then(function(response) {
+    }).then(function (response) {
 
-        console.log("news: " + response);
+        console.log(response);
+        nytResponse = response;
 
-        for (let i = 0; i < limit; i++) {
+        articleLink = `<h3>RECIPE: <a href="${response.response.docs[nyti].web_url}">${response.response.docs[nyti].headline.main}</a></h3>`
+        $("#headlines").append(articleLink);
+        //creates refresh button
+        const refreshNewsBtn = "<p class='refresh' id='refreshArticle'>&#8635;</p>";
+        $("#headlines").prepend(refreshNewsBtn);
 
-            articleLink = `<h3>LATEST NEWS: <a href="${response.response.docs[i].web_url}">${response.response.docs[i].headline.main}</a></h3>`
-
-            $("#headlines").append(articleLink);
-        }
     })
+
+
+}
+
+function refreshHeadline() {
+
+    //runs through response array
+    if (nyti < 9) {
+        nyti++;
+    } else {
+        nyti = 0;
+    }
+
+    //empties div and adds new headline
+    $("#refreshArticle").remove();
+    $("#headlines").empty();
+    articleLink = `<h3>RECIPE: <a href="${nytResponse.response.docs[nyti].web_url}">${nytResponse.response.docs[nyti].headline.main}</a></h3>`
+    $("#headlines").append(articleLink);
+
+    //creates refresh button
+    const refreshNewsBtn = "<p class='refresh' id='refreshArticle'>&#8635;</p>";
+    $("#headlines").prepend(refreshNewsBtn);
+
+
 }
 
 function stopStartGif() {
@@ -301,30 +335,33 @@ function stopStartGif() {
 }
 
 
-$(document).ready(function() {
+$(document).ready(function () {
 
     $("#gifDivHolder").hide();
+    $("#headlines").hide();
+    $("#imgDivHolder").hide();
 
     //preset food input
-    $(".preset").on("click", function() {
+    $(".preset").on("click", function () {
         event.preventDefault();
         foodInput = this.id;
         getGif(foodInput);
         getPic(foodInput);
         getNutrition(foodInput);
         getHeadline(foodInput);
-        recipe(foodInput);
+        //recipe(foodInput);
 
         //resets values
         gifOffset = 0;
         imgPage = 1;
+        nyti = 0;
 
         //deletes refresh buttons
         $(".refresh").remove();
     });
 
     //search input function
-    $("#foodButton").on("click", function() {
+    $("#foodButton").on("click", function () {
         event.preventDefault();
         foodInput = $("#foodInput").val().trim();
         if (foodInput) {
@@ -347,17 +384,22 @@ $(document).ready(function() {
     })
 
     //refresh gif function
-    $(document).on("click", "#refreshGif", function() {
+    $(document).on("click", "#refreshGif", function () {
         gifOffset++;
         getGif(foodInput);
     });
 
     //refresh images function
-    $(document).on("click", "#refreshImg", function() {
+    $(document).on("click", "#refreshImg", function () {
         imgPage++;
         $("#refreshImg").remove();
         getPic(foodInput);
 
+    })
+
+    //refresh article function
+    $(document).on("click", "#refreshArticle", function () {
+        refreshHeadline();
     })
 
     //runs stops and starts gif on user click
