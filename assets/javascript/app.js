@@ -1,6 +1,7 @@
 //variables
 let gifOffset = 0;
 let imgPage = 1;
+let foodInput = "";
 
 function getNutrition(foodInput) {
     //variables for nutrition input
@@ -226,7 +227,7 @@ $(document).ready(function () {
     //preset food input
     $(".preset").on("click", function () {
         event.preventDefault();
-        let foodInput = this.id;
+        foodInput = this.id;
         getGif(foodInput);
         getPic(foodInput);
         getNutrition(foodInput);
@@ -265,7 +266,7 @@ $(document).ready(function () {
     //refresh gif function
     $(document).on("click", "#refreshGif", function () {
         gifOffset++;
-        getGif();
+        getGif(foodInput);
     });
 
     //refresh images function
