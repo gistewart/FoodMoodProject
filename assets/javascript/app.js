@@ -168,8 +168,6 @@ function recipe() {
     });
 }
 
-
-
 function getHeadline(foodInput) {
 
     $("#headlines").empty();
@@ -177,13 +175,16 @@ function getHeadline(foodInput) {
     let limit = 1;
 
     const queryParams = {
-        q: "food+" + foodInput,
+        q: foodInput,
+        document_type: "recipe",
         "api-key": "4T4JAn6PPSJW7c7RpRNUgAK4qSQQxGio"
     };
 
     const paramString = $.param(queryParams);
 
     const queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?" + paramString;
+
+    console.log(queryURL);
 
     $.ajax({
         url: queryURL,
@@ -194,7 +195,7 @@ function getHeadline(foodInput) {
 
         for (let i = 0; i < limit; i++) {
 
-            articleLink = `<h3>LATEST NEWS: <a href="${response.response.docs[i].web_url}">${response.response.docs[i].headline.main}</a></h3>`
+            articleLink = `<h3>RECIPE: <a href="${response.response.docs[i].web_url}">${response.response.docs[i].headline.main}</a></h3>`
 
             $("#headlines").append(articleLink);
 
