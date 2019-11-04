@@ -1,6 +1,7 @@
 //variables
 let gifOffset = 0;
 let imgPage = 1;
+let foodInput = "";
 
 function getNutrition(foodInput) {
     //variables for nutrition input
@@ -168,6 +169,41 @@ function recipe(foodInput) {
 }
 
 
+
+function getHeadline(foodInput) {
+
+    $("#headlines").empty();
+
+    let limit = 1;
+
+    const queryParams = {
+        q: "food+" + foodInput,
+        "api-key": "4T4JAn6PPSJW7c7RpRNUgAK4qSQQxGio"
+    };
+
+    const paramString = $.param(queryParams);
+
+    const queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?" + paramString;
+
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+    }).then(function (response) {
+
+        console.log(response);
+
+        for (let i = 0; i < limit; i++) {
+
+            articleLink = `<h3>LATEST NEWS: <a href="${response.response.docs[i].web_url}">${response.response.docs[i].headline.main}</a></h3>`
+
+            $("#headlines").append(articleLink);
+
+        }
+
+
+    })
+}
+
 function stopStartGif() {
     //grabs image source attribute
     let imageURL = $(this).attr("src");
@@ -190,10 +226,11 @@ $(document).ready(function () {
     //preset food input
     $(".preset").on("click", function () {
         event.preventDefault();
-        let foodInput = this.id;
+        foodInput = this.id;
         getGif(foodInput);
         getPic(foodInput);
         getNutrition(foodInput);
+        getHeadline(foodInput);
 
         //resets values
         gifOffset = 0;
@@ -211,6 +248,7 @@ $(document).ready(function () {
             getGif(foodInput);
             getPic(foodInput);
             getNutrition(foodInput);
+            getHeadline(foodInput);
 
             //resets values
             gifOffset = 0;
@@ -227,7 +265,7 @@ $(document).ready(function () {
     //refresh gif function
     $(document).on("click", "#refreshGif", function () {
         gifOffset++;
-        getGif();
+        getGif(foodInput);
     });
 
     //refresh images function

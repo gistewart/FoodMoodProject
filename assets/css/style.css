@@ -31,6 +31,12 @@ body {
     margin-bottom: 1em;
 }
 
+footer {
+  background-color: #333333;
+  color: white;
+  padding: .5em;
+}
+
 #gifDivHolder{
     float:right;
     padding: .5em;
@@ -38,6 +44,10 @@ body {
 
 #imgDiv img, #gifDiv img{
     margin-bottom: 1.5em;
+}
+
+.presets {
+  margin-bottom: .75em;
 }
 
 /* Glow */
