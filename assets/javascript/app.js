@@ -22,7 +22,7 @@ function getNutrition(foodInput) {
             return response.json();
         })
         .then(function (response) {
-            console.log(response);
+            console.log("nutrition: " + response);
 
             fetch(
                     `https://api.nal.usda.gov/fdc/v1/${response.foods[0].fdcId}?api_key=ZVW3xGLgjZqCbvHWwuGgXCYMKY3rXnbM3jWnLjn5`
@@ -231,6 +231,7 @@ $(document).ready(function () {
         getPic(foodInput);
         getNutrition(foodInput);
         getHeadline(foodInput);
+        recipe(foodInput);
 
         //resets values
         gifOffset = 0;
@@ -249,6 +250,7 @@ $(document).ready(function () {
             getPic(foodInput);
             getNutrition(foodInput);
             getHeadline(foodInput);
+            recipe(foodInput);
 
             //resets values
             gifOffset = 0;
