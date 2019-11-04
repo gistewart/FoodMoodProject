@@ -262,27 +262,6 @@ function restaurantAPICall(cuisineId) {
   });
 }
 
-// ** Why is there a document.ready here?
-$(document).ready(function() {
-  //search input function
-  $("#foodButton").on("click", function() {
-    event.preventDefault();
-    foodInput = $("#foodInput")
-      .val()
-      .trim();
-    if (foodInput) {
-      getGif(foodInput);
-      getPic(foodInput);
-      getNutrition(foodInput);
-
-      //resets values
-      gifOffset = 0;
-      imgPage = 1;
-
-      //deletes refresh buttons
-      $(".refresh").remove();
-
-
 function getHeadline(foodInput) {
 
     $("#headlines").empty();
@@ -331,7 +310,6 @@ function stopStartGif() {
 
 }
 
-
 $(document).ready(function () {
 
     $("#gifDivHolder").hide();
@@ -375,7 +353,7 @@ $(document).ready(function () {
         //clears food input
         $("#foodInput").val("");
 
-    })
+    });
 
     //refresh gif function
     $(document).on("click", "#refreshGif", function () {
@@ -389,10 +367,10 @@ $(document).ready(function () {
         $("#refreshImg").remove();
         getPic(foodInput);
 
-    })
+    });
 
     //runs stops and starts gif on user click
-    $(document).on("click", "#gifDiv img", stopStartGif)
+    $(document).on("click", "#gifDiv img", stopStartGif);
 
 
 })
