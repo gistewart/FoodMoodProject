@@ -6,6 +6,7 @@ let foodInput = "";
 let recipeObj = {};
 
 function getNutrition(foodInput) {
+    $("#nutDiv").show();
 
     //----------------------------------------------------------
     //beginning of nutrution query
@@ -374,6 +375,7 @@ $(document).ready(function () {
     $("#gifDivHolder").hide();
     $("#headlines").hide();
     $("#imgDivHolder").hide();
+    $("#nutDiv").hide();
 
     //preset food input
     $(".preset").on("click", function () {
