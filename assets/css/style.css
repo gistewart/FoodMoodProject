@@ -16,6 +16,15 @@
     background-color: whitesmoke;
  }
 
+ #topTitle{
+    font-weight: bold;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    size: 4em;
+ }
+
  .input-group-append, .btn-outline-secondary{
      background-color: whitesmoke;
  }
