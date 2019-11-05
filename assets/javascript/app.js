@@ -73,7 +73,7 @@ function getGif(foodInput) {
     const gifQueryParams = {
         "api_key": "CbRv29mIUSwkTAVauYUvcQ8lOGyxCop2",
         q: foodInput,
-        "limit": 1,
+        "limit": 3,
         "offset": gifOffset,
         "rating": "G",
         "lang": "en"
@@ -91,8 +91,10 @@ function getGif(foodInput) {
         console.log("gif:");
         console.log(response);
         //creates image div and appends to DOM
-        const gifContent = "<img src=" + response.data[0].images.fixed_width.url + "/>";
-        $("#gifDiv").append(gifContent);
+        for (let i = 0; i < 3; i++) {
+            const gifContent = "<img src=" + response.data[i].images.fixed_width.url + "/>";
+            $("#gifDiv").append(gifContent);
+        }
 
         //creates refresh button
         const refreshGifBtn = "<p class='refresh' id='refreshGif'>&#8635;</p>";
@@ -397,7 +399,7 @@ $(document).ready(function () {
 
     //refresh gif function
     $(document).on("click", "#refreshGif", function () {
-        gifOffset++;
+        gifOffset += 3;
         getGif(foodInput);
     });
 
