@@ -25,7 +25,7 @@ function getNutrition(foodInput) {
 
     .then(function(response) {
         console.log(response);
-        console.log("foodID: " + response.hits[0].fields.item_id); **
+        // console.log("foodID: " + response.hits[0].fields.item_id); **
         foodID = response.hits[0].fields.item_id;
     })
 
@@ -41,7 +41,12 @@ function getNutrition(foodInput) {
                 $("#servingSizeAmt").text(response.nf_serving_size_qty + " " + response.nf_serving_size_unit + " (" + parseInt(response.nf_serving_weight_grams) + "g)");
                 $("#calAmt").text(parseInt(response.nf_calories));
 
+                // write vitamin values to the DOM
                 $("#vitA-amt").text(parseInt(response.nf_vitamin_a_dv) + "%");
+                $("#vitC-amt").text(parseInt(response.nf_vitamin_c_dv) + "%");
+                $("#calcium-amt").text(parseInt(response.nf_calcium_dv) + "%");
+                $("#iron-amt").text(parseInt(response.nf_iron_dv) + "%");
+                //end of vitamin section
 
                 // console.log("usda info: " + response.usda_fields)  **
                 if (response.usda_fields === null) {
@@ -65,18 +70,6 @@ function getNutrition(foodInput) {
 
 // end of nutrition query
 //----------------------------------------------------------
-
-//----------------------------------------------------------
-//beginning of vitamin section
-
-
-
-
-
-
-//end of vitamin section
-//----------------------------------------------------------
-
 
 function getGif(foodInput) {
     $("#gifDiv").empty() <<
