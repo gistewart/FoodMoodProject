@@ -16,51 +16,67 @@ function getNutrition(foodInput) {
     };
     let usda_check = "";
 
-    // $.ajax({
-    //     "async": true,
-    //     "crossDomain": true,
-    //     "url": "https://api.nutritionix.com/v1_1/search/" + foodInput + "?results=0%3A20&cal_min=0&cal_max=50000&fields=item_name%2Cbrand_name%2Citem_id%2Cbrand_id&appId=21fc5346&appKey=ced84d9b86a8143034b8ede11feaf534",
-    //     "method": "GET"
-    // })
+    $.ajax({
+        "async": true,
+        "crossDomain": true,
+        "url": "https://api.nutritionix.com/v1_1/search/" + foodInput + "?results=0%3A20&cal_min=0&cal_max=50000&fields=item_name%2Cbrand_name%2Citem_id%2Cbrand_id&appId=21fc5346&appKey=ced84d9b86a8143034b8ede11feaf534",
+        "method": "GET"
+    })
 
-    // .then(function(response) {
-    //     console.log(response);
-    //     // console.log("foodID: " + response.hits[0].fields.item_id);  **
-    //     foodID = response.hits[0].fields.item_id;
-    // })
+    .then(function(response) {
+        console.log(response);
+        console.log("foodID: " + response.hits[0].fields.item_id); **
+        foodID = response.hits[0].fields.item_id;
+    })
 
-    // .then(function(response) {
-    //         $.ajax({
-    //                 "async": true,
-    //                 "crossDomain": true,
-    //                 "url": "https://api.nutritionix.com/v1_1/item?id=" + foodID + "&appId=21fc5346&appKey=ced84d9b86a8143034b8ede11feaf534",
-    //                 "method": "GET"
-    //             })
-    //             .then(function(response) {
-    //                 console.log(response)
-    //                 $("#servingSizeAmt").text(response.nf_serving_size_qty + " " + response.nf_serving_size_unit + " (" + parseInt(response.nf_serving_weight_grams) + "g)");
-    //                 $("#calAmt").text(parseInt(response.nf_calories));
-    //                 // console.log("usda info: " + response.usda_fields)  **
-    //                 if (response.usda_fields === null) {
-    //                     $("#fatAmt").text(parseInt(response.nf_total_fat) + "g");
-    //                     $("#cholesterolAmt").text(parseInt(response.nf_cholesterol) + "mg");
-    //                     $("#sodiumAmt").text(parseInt(response.nf_sodium) + "mg");
-    //                     $("#carbohydrateAmt").text(parseInt(response.nf_total_carbohydrate) + "g");
-    //                     $("#fiberAmt").text(parseInt(response.nf_dietary_fiber) + "g");
-    //                     $("#proteinAmt").text(parseInt(response.nf_protein) + "g");
-    //                 } else {
-    //                     $("#fatAmt").text(parseInt(response.usda_fields.FAT.value) + response.usda_fields.FAT.uom);
-    //                     $("#cholesterolAmt").text(parseInt(response.usda_fields.CHOLE.value) + response.usda_fields.CHOLE.uom);
-    //                     $("#sodiumAmt").text(parseInt(response.usda_fields.NA.value) + response.usda_fields.NA.uom);
-    //                     $("#carbohydrateAmt").text(parseInt(response.usda_fields.CHOCDF.value) + response.usda_fields.CHOCDF.uom);
-    //                     $("#fiberAmt").text(parseInt(response.usda_fields.FIBTG.value) + response.usda_fields.FIBTG.uom);
-    //                     $("#proteinAmt").text(parseInt(response.usda_fields.PROCNT.value) + response.usda_fields.PROCNT.uom);
-    //                 }
-    //             })
-    //     })
-    // end of nutrition query
-    //----------------------------------------------------------
+    .then(function(response) {
+        $.ajax({
+                "async": true,
+                "crossDomain": true,
+                "url": "https://api.nutritionix.com/v1_1/item?id=" + foodID + "&appId=21fc5346&appKey=ced84d9b86a8143034b8ede11feaf534",
+                "method": "GET"
+            })
+            .then(function(response) {
+                console.log(response)
+                $("#servingSizeAmt").text(response.nf_serving_size_qty + " " + response.nf_serving_size_unit + " (" + parseInt(response.nf_serving_weight_grams) + "g)");
+                $("#calAmt").text(parseInt(response.nf_calories));
+
+                $("#vitA-amt").text(parseInt(response.nf_vitamin_a_dv) + "%");
+
+                // console.log("usda info: " + response.usda_fields)  **
+                if (response.usda_fields === null) {
+                    $("#fatAmt").text(parseInt(response.nf_total_fat) + "g");
+                    $("#cholesterolAmt").text(parseInt(response.nf_cholesterol) + "mg");
+                    $("#sodiumAmt").text(parseInt(response.nf_sodium) + "mg");
+                    $("#carbohydrateAmt").text(parseInt(response.nf_total_carbohydrate) + "g");
+                    $("#fiberAmt").text(parseInt(response.nf_dietary_fiber) + "g");
+                    $("#proteinAmt").text(parseInt(response.nf_protein) + "g");
+                } else {
+                    $("#fatAmt").text(parseInt(response.usda_fields.FAT.value) + response.usda_fields.FAT.uom);
+                    $("#cholesterolAmt").text(parseInt(response.usda_fields.CHOLE.value) + response.usda_fields.CHOLE.uom);
+                    $("#sodiumAmt").text(parseInt(response.usda_fields.NA.value) + response.usda_fields.NA.uom);
+                    $("#carbohydrateAmt").text(parseInt(response.usda_fields.CHOCDF.value) + response.usda_fields.CHOCDF.uom);
+                    $("#fiberAmt").text(parseInt(response.usda_fields.FIBTG.value) + response.usda_fields.FIBTG.uom);
+                    $("#proteinAmt").text(parseInt(response.usda_fields.PROCNT.value) + response.usda_fields.PROCNT.uom);
+                }
+            })
+    })
 }
+
+// end of nutrition query
+//----------------------------------------------------------
+
+//----------------------------------------------------------
+//beginning of vitamin section
+
+
+
+
+
+
+//end of vitamin section
+//----------------------------------------------------------
+
 
 function getGif(foodInput) {
     $("#gifDiv").empty() <<
