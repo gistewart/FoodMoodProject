@@ -270,6 +270,7 @@ function restaurantAPICall(cuisineId) {
         }
     }).then(function(response) {
         // response = JSON.parse(response);
+        $("#restdiv").empty();
 
         for (let i = 0; i < response.restaurants.length; i++) {
             console.log(response.restaurants[i].restaurant.name);
