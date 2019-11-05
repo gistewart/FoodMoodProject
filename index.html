@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <!-- Links to bootstrap and css file-->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
     <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
     <title>Food Mood</title>
-</head>
+  </head>
 
-<body>
-
+  <body>
     <h1 class="text-center">Food Mood</h1>
 
     <div class="searchbar input-group col-md-6 mb-3 mx-auto">
@@ -139,7 +142,6 @@
         </div>
       </div>
     </div>
-    <br />
 
     <div class id="recipeDiv"></div>
 
@@ -148,133 +150,126 @@
       <div id="restdiv"></div>
     </div>
 
-    <br />
-
     <div class="container" id="imgDivHolder">
       <div class="row" id="imgDiv"></div>
     </div>
 
     <div class="container">
-        <div class="row">
-            <div class="col-4">
-                <div id="nutDiv">
-                    <div class="container">
-
-                        <div class="row header">
-                            <div class="col-12">
-                                Nutrition Facts
-                            </div>
-                        </div>
-
-                        <div class="row serving-size">
-                            <div class="col-2 servingSizeLabel">
-                                Item
-                            </div>
-                            <div class="col-10 nutVal text-right" id="servingSizeAmt">
-                            </div>
-                        </div>
-
-                        <div class="row calories">
-                            <div class="col-6 amtPerServing">
-                                Amount per item
-                                <div class="row">
-                                    <div class="col-12 calLabel">Calories</div>
-                                </div>
-                            </div>
-                            <div class="col-6 text-right" id="calAmt">
-                            </div>
-                        </div>
-
-                        <div class="details">
-                            <div class="row">
-                                <div class="col-8 stdLabel">
-                                    Total Fat
-                                </div>
-                                <div class="col-4 text-right" id="fatAmt">
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-8 stdLabel">
-                                    Cholesterol
-                                </div>
-                                <div class="col-4 text-right" id="cholesterolAmt">
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-6 stdLabel">
-                                    Sodium
-                                </div>
-                                <div class="col-6 text-right" id="sodiumAmt">
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-8 stdLabel">
-                                    Carbohydrates
-                                </div>
-                                <div class="col-4 text-right" id="carbohydrateAmt">
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-8 stdLabel">
-                                    Fiber
-                                </div>
-                                <div class="col-4 text-right" id="fiberAmt">
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-8 stdLabel">
-                                    Protein
-                                </div>
-                                <div class="col-4 text-right" id="proteinAmt">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+      <div class="row">
+        <div class="col-4">
+          <div id="nutDiv">
+            <div class="container">
+              <div class="row header">
+                <div class="col-12">
+                  Nutrition Facts
                 </div>
+              </div>
+
+              <div class="row serving-size">
+                <div class="col-2 servingSizeLabel">
+                  Item
+                </div>
+                <div class="col-10 nutVal text-right" id="servingSizeAmt"></div>
+              </div>
+
+              <div class="row calories">
+                <div class="col-6 amtPerServing">
+                  Amount per item
+                  <div class="row">
+                    <div class="col-12 calLabel">Calories</div>
+                  </div>
+                </div>
+                <div class="col-6 text-right" id="calAmt"></div>
+              </div>
+
+              <div class="details">
+                <div class="row">
+                  <div class="col-8 stdLabel">
+                    Total Fat
+                  </div>
+                  <div class="col-4 text-right" id="fatAmt"></div>
+                </div>
+
+                <div class="row">
+                  <div class="col-8 stdLabel">
+                    Cholesterol
+                  </div>
+                  <div class="col-4 text-right" id="cholesterolAmt"></div>
+                </div>
+
+                <div class="row">
+                  <div class="col-6 stdLabel">
+                    Sodium
+                  </div>
+                  <div class="col-6 text-right" id="sodiumAmt"></div>
+                </div>
+
+                <div class="row">
+                  <div class="col-8 stdLabel">
+                    Carbohydrates
+                  </div>
+                  <div class="col-4 text-right" id="carbohydrateAmt"></div>
+                </div>
+
+                <div class="row">
+                  <div class="col-8 stdLabel">
+                    Fiber
+                  </div>
+                  <div class="col-4 text-right" id="fiberAmt"></div>
+                </div>
+
+                <div class="row">
+                  <div class="col-8 stdLabel">
+                    Protein
+                  </div>
+                  <div class="col-4 text-right" id="proteinAmt"></div>
+                </div>
+              </div>
             </div>
-            <div class="col-4" id="gifDivHolder">
-                <div id="gifDiv"></div>
-            </div>
-            <div class="col-4" id="restdiv"></div>
+          </div>
         </div>
+        <div class="col-4" id="gifDivHolder">
+          <div id="gifDiv"></div>
+        </div>
+        <div class="col-4" id="restdiv"></div>
+      </div>
     </div>
 
     <!-------------------------------------------------->
     <!-- beginning of vitDiv section -->
 
     <div id="vitDiv">
-        <div class="container">
-            <div class="card" style="width: 170px">
-                <img class="card-img" src="assets/images/vitamins.jpeg" alt="Vitamin info" width:100%>
-                <div class="card-img-overlay">
-                    <div class="header">
-                        <p class="vit-header">% of Daily Value</p>
-                    </div>
-                    <div class="rounded-circle vitA-shape">
-                        <p class="vit-label">Vit A</p>
-                        <p class="vit-amt" id="vitA-amt"></p>
-                    </div>
-                    <div class="rounded-circle vitC-shape">
-                        <p class="vit-label">Vit C</p>
-                        <p class="vit-amt" id="vitC-amt"></p>
-                    </div>
-                    <div class="rounded-circle calcium-shape">
-                        <p class="vit-label">Ca</p>
-                        <p class="vit-amt" id="calcium-amt"></p>
-                    </div>
-                    <div class="rounded-circle iron-shape">
-                        <p class="vit-label">Iron</p>
-                        <p class="vit-amt" id="iron-amt"></p>
-                    </div>
-                </div>
+      <div class="container">
+        <div class="card" style="width: 170px">
+          <img
+            class="card-img"
+            src="assets/images/vitamins.jpeg"
+            alt="Vitamin info"
+            width:100%
+          />
+          <div class="card-img-overlay">
+            <div class="header">
+              <p class="vit-header">% of Daily Value</p>
             </div>
+            <div class="rounded-circle vitA-shape">
+              <p class="vit-label">Vit A</p>
+              <p class="vit-amt" id="vitA-amt"></p>
+            </div>
+            <div class="rounded-circle vitC-shape">
+              <p class="vit-label">Vit C</p>
+              <p class="vit-amt" id="vitC-amt"></p>
+            </div>
+            <div class="rounded-circle calcium-shape">
+              <p class="vit-label">Ca</p>
+              <p class="vit-amt" id="calcium-amt"></p>
+            </div>
+            <div class="rounded-circle iron-shape">
+              <p class="vit-label">Iron</p>
+              <p class="vit-amt" id="iron-amt"></p>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
 
     <!-- end of vitDiv section -->
@@ -288,6 +283,5 @@
     <!-- Links to jquery and javascript file -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="assets/javascript/app.js"></script>
-</body>
-
+  </body>
 </html>
