@@ -7,6 +7,7 @@ let recipeObj = {};
 
 function getNutrition(foodInput) {
     $("#nutDiv").show();
+    $("#vitaDiv").show();
 
     //----------------------------------------------------------
     //beginning of nutrution query
@@ -250,8 +251,6 @@ function cuisineAPICall() {
 
 function restaurantAPICall(cuisineId) {
 
-    $("#restdiv").show();
-
     const ApiKey = "de972d173dd44d03623092703cd67ba8";
 
     const restaurantQueryURL =
@@ -376,6 +375,8 @@ function runApis(foodInput) {
         //deletes refresh buttons
         $(".refresh").remove();
         $("#refreshImg").remove();
+
+        $("#restdiv").show();
     }
     //clears food input
     $("#foodInput").val("");
@@ -390,6 +391,7 @@ $(document).ready(function() {
     $("#imgDivHolder").hide();
     $("#nutDiv").hide();
     $("#restdiv").hide();
+    $("#vitaDiv").hide();
 
     //preset food input
     $(".preset").on("click", function() {
