@@ -129,11 +129,16 @@ footer {
 
 #gifDivHolder {
     padding: .5em;
+    text-align: center;
 }
 
 #imgDiv img,
 #gifDiv img {
     margin-bottom: 1.5em;
+}
+
+#gifDiv img {
+    display: inline-block;
 }
 
 .presets {

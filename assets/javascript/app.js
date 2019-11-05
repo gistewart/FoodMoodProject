@@ -240,7 +240,7 @@ function cuisineAPICall() {
 function restaurantAPICall(cuisineId) {
     const ApiKey = "de972d173dd44d03623092703cd67ba8";
 
-    const restarauntQueryURL =
+    const restaurantQueryURL =
         "https://developers.zomato.com/api/v2.1/search?lat=" +
         lat +
         "&lon=" +
@@ -250,7 +250,7 @@ function restaurantAPICall(cuisineId) {
 
     $.ajax({
         //calls giphy search
-        url: restarauntQueryURL,
+        url: restaurantQueryURL,
         method: "GET",
         headers: {
             "user-key": ApiKey
@@ -263,10 +263,10 @@ function restaurantAPICall(cuisineId) {
             console.log(response.restaurants[i].restaurant.phone_numbers);
 
             const restname = $("<p>").text(
-                "Restaraunt Name:" + response.restaurants[i].restaurant.name
+                "Restaurant Name:" + response.restaurants[i].restaurant.name
             );
             const restnumber = $("<p>").text(
-                "Restaraunt Number:" + response.restaurants[i].restaurant.phone_numbers
+                "Restaurant Number:" + response.restaurants[i].restaurant.phone_numbers
             );
 
             $("#restdiv").append(restname, restnumber);
