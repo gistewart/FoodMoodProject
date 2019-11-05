@@ -26,6 +26,7 @@
     padding-right: 5px !important;
     padding-left: 5px !important;
     border: 3px solid black;
+    float: left;
 }
 
 #nutDiv .header {
@@ -96,6 +97,42 @@
     font-size: 15px;
 }
 
+#vitDiv .card {
+    border: 1px solid black;
+    position: absolute;
+    margin-left: 20px;
+}
+
+#vitDiv .test {
+    width: 70px;
+    height: 70px;
+    background-color: orange;
+    position: relative;
+    left: 100px;
+    top: -10px;
+}
+
+#vitDiv {
+    float: left;
+}
+
+#vitDiv .vitA-label {
+    text-align: center;
+    color: black;
+    font-weight: 400;
+    font-size: 12px;
+    padding-top: 4px;
+    line-height: 0.9;
+}
+
+#vitDiv .vitA-amt {
+    text-align: center;
+    color: black;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 0.8;
+}
+
 body {
     width: 90%;
     margin: 0 auto;
@@ -113,11 +150,11 @@ body {
 }
 
 #headlines {
-  border-top-left-radius: 16px;
-  border-top-right-radius: 16px;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-  background-color: #333333;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    background-color: #333333;
 }
 
 footer {

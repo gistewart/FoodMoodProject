@@ -16,48 +16,48 @@ function getNutrition(foodInput) {
     };
     let usda_check = "";
 
-    $.ajax({
-        "async": true,
-        "crossDomain": true,
-        "url": "https://api.nutritionix.com/v1_1/search/" + foodInput + "?results=0%3A20&cal_min=0&cal_max=50000&fields=item_name%2Cbrand_name%2Citem_id%2Cbrand_id&appId=21fc5346&appKey=ced84d9b86a8143034b8ede11feaf534",
-        "method": "GET"
-    })
+    // $.ajax({
+    //     "async": true,
+    //     "crossDomain": true,
+    //     "url": "https://api.nutritionix.com/v1_1/search/" + foodInput + "?results=0%3A20&cal_min=0&cal_max=50000&fields=item_name%2Cbrand_name%2Citem_id%2Cbrand_id&appId=21fc5346&appKey=ced84d9b86a8143034b8ede11feaf534",
+    //     "method": "GET"
+    // })
 
-        .then(function (response) {
-            console.log("nutrition: " + response);
-            console.log("foodID: " + response.hits[0].fields.item_id);
-            foodID = response.hits[0].fields.item_id;
-        })
+    // .then(function(response) {
+    //     console.log(response);
+    //     // console.log("foodID: " + response.hits[0].fields.item_id);  **
+    //     foodID = response.hits[0].fields.item_id;
+    // })
 
-        .then(function (response) {
-            $.ajax({
-                "async": true,
-                "crossDomain": true,
-                "url": "https://api.nutritionix.com/v1_1/item?id=" + foodID + "&appId=21fc5346&appKey=ced84d9b86a8143034b8ede11feaf534",
-                "method": "GET"
-            })
-                .then(function (response) {
-                    console.log("nutrients: " + response)
-                    $("#servingSizeAmt").text(response.nf_serving_size_qty + " " + response.nf_serving_size_unit + " (" + parseInt(response.nf_serving_weight_grams) + "g)");
-                    $("#calAmt").text(parseInt(response.nf_calories));
-                    console.log("usda info: " + response.usda_fields)
-                    if (response.usda_fields === null) {
-                        $("#fatAmt").text(parseInt(response.nf_total_fat) + "g");
-                        $("#cholesterolAmt").text(parseInt(response.nf_cholesterol) + "mg");
-                        $("#sodiumAmt").text(parseInt(response.nf_sodium) + "mg");
-                        $("#carbohydrateAmt").text(parseInt(response.nf_total_carbohydrate) + "g");
-                        $("#fiberAmt").text(parseInt(response.nf_dietary_fiber) + "g");
-                        $("#proteinAmt").text(parseInt(response.nf_protein) + "g");
-                    } else {
-                        $("#fatAmt").text(parseInt(response.usda_fields.FAT.value) + response.usda_fields.FAT.uom);
-                        $("#cholesterolAmt").text(parseInt(response.usda_fields.CHOLE.value) + response.usda_fields.CHOLE.uom);
-                        $("#sodiumAmt").text(parseInt(response.usda_fields.NA.value) + response.usda_fields.NA.uom);
-                        $("#carbohydrateAmt").text(parseInt(response.usda_fields.CHOCDF.value) + response.usda_fields.CHOCDF.uom);
-                        $("#fiberAmt").text(parseInt(response.usda_fields.FIBTG.value) + response.usda_fields.FIBTG.uom);
-                        $("#proteinAmt").text(parseInt(response.usda_fields.PROCNT.value) + response.usda_fields.PROCNT.uom);
-                    }
-                })
-        })
+    // .then(function(response) {
+    //         $.ajax({
+    //                 "async": true,
+    //                 "crossDomain": true,
+    //                 "url": "https://api.nutritionix.com/v1_1/item?id=" + foodID + "&appId=21fc5346&appKey=ced84d9b86a8143034b8ede11feaf534",
+    //                 "method": "GET"
+    //             })
+    //             .then(function(response) {
+    //                 console.log(response)
+    //                 $("#servingSizeAmt").text(response.nf_serving_size_qty + " " + response.nf_serving_size_unit + " (" + parseInt(response.nf_serving_weight_grams) + "g)");
+    //                 $("#calAmt").text(parseInt(response.nf_calories));
+    //                 // console.log("usda info: " + response.usda_fields)  **
+    //                 if (response.usda_fields === null) {
+    //                     $("#fatAmt").text(parseInt(response.nf_total_fat) + "g");
+    //                     $("#cholesterolAmt").text(parseInt(response.nf_cholesterol) + "mg");
+    //                     $("#sodiumAmt").text(parseInt(response.nf_sodium) + "mg");
+    //                     $("#carbohydrateAmt").text(parseInt(response.nf_total_carbohydrate) + "g");
+    //                     $("#fiberAmt").text(parseInt(response.nf_dietary_fiber) + "g");
+    //                     $("#proteinAmt").text(parseInt(response.nf_protein) + "g");
+    //                 } else {
+    //                     $("#fatAmt").text(parseInt(response.usda_fields.FAT.value) + response.usda_fields.FAT.uom);
+    //                     $("#cholesterolAmt").text(parseInt(response.usda_fields.CHOLE.value) + response.usda_fields.CHOLE.uom);
+    //                     $("#sodiumAmt").text(parseInt(response.usda_fields.NA.value) + response.usda_fields.NA.uom);
+    //                     $("#carbohydrateAmt").text(parseInt(response.usda_fields.CHOCDF.value) + response.usda_fields.CHOCDF.uom);
+    //                     $("#fiberAmt").text(parseInt(response.usda_fields.FIBTG.value) + response.usda_fields.FIBTG.uom);
+    //                     $("#proteinAmt").text(parseInt(response.usda_fields.PROCNT.value) + response.usda_fields.PROCNT.uom);
+    //                 }
+    //             })
+    //     })
     // end of nutrition query
     //----------------------------------------------------------
 }
@@ -84,8 +84,8 @@ function getGif(foodInput) {
         //calls giphy search
         url: gifQueryURL,
         Method: "GET"
-    }).then(function (response) {
-        console.log("gif: " + response);
+    }).then(function(response) {
+        console.log(response);
         //creates image div and appends to DOM
         const gifContent = "<img src=" + response.data[0].images.fixed_width.url + "/>";
         $("#gifDiv").append(gifContent);
@@ -113,14 +113,14 @@ function getPic(foodInput) {
         //calls pexel url search
         url: imgQueryUrl,
         Method: "GET",
-        beforeSend: function (request) {
+        beforeSend: function(request) {
             request.setRequestHeader(
                 "Authorization",
                 "563492ad6f91700001000001a0e4738780644fac9acefdba362470d6"
             );
         }
-    }).then(function (response) {
-        console.log("pic: " + response);
+    }).then(function(response) {
+        console.log(response);
         for (let i = 0; i < response.photos.length; i++) {
             //adds image to the DOM
             const imgContent = `<div class='col-12 col-md-6 col-lg-4'><div class='text-center'><a href="${response.photos[i].url}"><img class='hvr-glow' src="${response.photos[i].src.tiny}"/></a></div></div>`;
@@ -151,10 +151,10 @@ function recipe(foodInput) {
         //calls giphy search
         url: recipeQueryURL,
         Method: "GET"
-    }).then(function (response) {
+    }).then(function(response) {
         response = JSON.parse(response);
 
-        console.log("recipe: " + response);
+        console.log(response);
 
         // console.log("Recipe: " + response.recipes[1].source_url);
         // console.log("Title: " + response.recipes[1].title);
@@ -171,7 +171,7 @@ function recipe(foodInput) {
 let lat;
 let long;
 
-navigator.geolocation.getCurrentPosition(function (position) {
+navigator.geolocation.getCurrentPosition(function(position) {
     // console.log(position.coords.latitude);
     // console.log(position.coords.longitude);
 
@@ -200,7 +200,7 @@ function cuisineAPICall() {
         headers: {
             "user-key": ApiKey
         }
-    }).then(function (response) {
+    }).then(function(response) {
         // response = JSON.parse(response);
 
         //   console.log(response.cuisines);
@@ -243,7 +243,7 @@ function restaurantAPICall(cuisineId) {
         headers: {
             "user-key": ApiKey
         }
-    }).then(function (response) {
+    }).then(function(response) {
         // response = JSON.parse(response);
 
         for (let i = 0; i < response.restaurants.length; i++) {
@@ -282,7 +282,7 @@ function getHeadline(foodInput) {
     $.ajax({
         url: queryURL,
         method: "GET"
-    }).then(function (response) {
+    }).then(function(response) {
 
         console.log(response);
         nytResponse = response;
@@ -335,14 +335,14 @@ function stopStartGif() {
 }
 
 
-$(document).ready(function () {
+$(document).ready(function() {
 
     $("#gifDivHolder").hide();
     $("#headlines").hide();
     $("#imgDivHolder").hide();
 
     //preset food input
-    $(".preset").on("click", function () {
+    $(".preset").on("click", function() {
         event.preventDefault();
         foodInput = this.id;
         getGif(foodInput);
@@ -361,7 +361,7 @@ $(document).ready(function () {
     });
 
     //search input function
-    $("#foodButton").on("click", function () {
+    $("#foodButton").on("click", function() {
         event.preventDefault();
         foodInput = $("#foodInput").val().trim();
         if (foodInput) {
@@ -384,13 +384,13 @@ $(document).ready(function () {
     })
 
     //refresh gif function
-    $(document).on("click", "#refreshGif", function () {
+    $(document).on("click", "#refreshGif", function() {
         gifOffset++;
         getGif(foodInput);
     });
 
     //refresh images function
-    $(document).on("click", "#refreshImg", function () {
+    $(document).on("click", "#refreshImg", function() {
         imgPage++;
         $("#refreshImg").remove();
         getPic(foodInput);
@@ -398,7 +398,7 @@ $(document).ready(function () {
     })
 
     //refresh article function
-    $(document).on("click", "#refreshArticle", function () {
+    $(document).on("click", "#refreshArticle", function() {
         refreshHeadline();
     })
 
