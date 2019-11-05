@@ -158,6 +158,10 @@ footer {
     margin-bottom: .75em;
 }
 
+#restdiv {
+    background-color: whitesmoke;
+    border-radius: 16px;
+}
 
 /* Glow */
 

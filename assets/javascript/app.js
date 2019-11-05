@@ -239,6 +239,9 @@ function cuisineAPICall() {
 }
 
 function restaurantAPICall(cuisineId) {
+
+    $("#restdiv").show();
+
     const ApiKey = "de972d173dd44d03623092703cd67ba8";
 
     const restaurantQueryURL =
@@ -376,6 +379,7 @@ $(document).ready(function () {
     $("#headlines").hide();
     $("#imgDivHolder").hide();
     $("#nutDiv").hide();
+    $("#restdiv").hide();
 
     //preset food input
     $(".preset").on("click", function () {
