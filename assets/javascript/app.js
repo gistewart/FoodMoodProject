@@ -208,7 +208,7 @@ navigator.geolocation.getCurrentPosition(function(position) {
     // const location = position;
 });
 
-function cuisineAPICall() {
+function cuisineAPICall(foodInput) {
     const ApiKey = "de972d173dd44d03623092703cd67ba8";
 
     const cuisineQueryURL =
@@ -365,6 +365,7 @@ function runApis(foodInput) {
         getGif(foodInput);
         getPic(foodInput);
         getNutrition(foodInput);
+        cuisineAPICall(foodInput);
         //recipe(foodInput);
 
         //resets values
