@@ -301,6 +301,8 @@ function restaurantAPICall(cuisineId) {
 
         //console.log(response.restaurants.length);
 
+        $("#restdiv").empty();
+
         for (let i = 0; i < 10; i++) {
             console.log(response.restaurants[i].restaurant.name);
             console.log(response.restaurants[i].restaurant.phone_numbers);
