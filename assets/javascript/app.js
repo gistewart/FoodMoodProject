@@ -301,10 +301,10 @@ function restaurantAPICall(lat, long, id) {
             //console.log(response.restaurants[i].restaurant.name);
             //console.log(response.restaurants[i].restaurant.phone_numbers);
 
-            const restname = $("<p>").text(
-                "Restaurant Name: " + response.restaurants[i].restaurant.name
+            let restname = $("<p>").text(
+                response.restaurants[i].restaurant.name
             );
-            const restnumber = $("<a>")
+            let restnumber = $("<a>")
                 .text(response.restaurants[i].restaurant.phone_numbers)
                 .attr(
                     "href",
@@ -393,9 +393,9 @@ function stopStartGif() {
 function runApis(foodInput) {
 
     if (foodInput) {
-        getGif(foodInput);
-        getPic(foodInput);
-        getNutrition(foodInput);
+        //getGif(foodInput);
+        //getPic(foodInput);
+        //getNutrition(foodInput);
         cuisineAPICall(foodInput);
         //recipe(foodInput);
 

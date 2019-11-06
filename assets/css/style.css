@@ -258,6 +258,14 @@ footer {
     color: black;
 }
 
+p {
+  margin: 0;
+}
+
+a {
+  margin-bottom: 1em;
+}
+
 /* Glow */
 
 .hvr-glow {
