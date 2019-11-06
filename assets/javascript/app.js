@@ -221,23 +221,18 @@ function recipe(foodInput) {
     });
 }
 
-let lat;
-let long;
+let lat = 33.769967;
+let long = -84.39020889999999;
 
 navigator.geolocation.getCurrentPosition(function (position) {
-    // console.log(position.coords.latitude);
-    // console.log(position.coords.longitude);
 
     lat = position.coords.latitude;
     long = position.coords.longitude;
 
-    cuisineAPICall();
-    // restaurantAPICall();
-
-    // const location = position;
 });
 
 function cuisineAPICall(foodInput) {
+
     const ApiKey = "de972d173dd44d03623092703cd67ba8";
 
     const cuisineQueryURL =
@@ -247,7 +242,6 @@ function cuisineAPICall(foodInput) {
         long;
 
     $.ajax({
-        //calls giphy search
         url: cuisineQueryURL,
         method: "GET",
         headers: {
@@ -260,12 +254,12 @@ function cuisineAPICall(foodInput) {
 
         let id;
 
-        const arr = response.cuisines;
+        let arr = response.cuisines;
 
         for (let i = 0; i < arr.length; i++) {
             // console.log(arr[i].cuisine);
-            const food = foodInput.toLowerCase();
-            const cuisine = arr[i].cuisine.cuisine_name.toLowerCase();
+            let food = foodInput.toLowerCase();
+            let cuisine = arr[i].cuisine.cuisine_name.toLowerCase();
 
             // console.log(food, cuisine);
 
@@ -274,11 +268,11 @@ function cuisineAPICall(foodInput) {
             }
         }
         //   console.log("id", id);
-        restaurantAPICall(id);
+        restaurantAPICall(lat, long, id);
     });
 }
 
-function restaurantAPICall(cuisineId) {
+function restaurantAPICall(lat, long, id) {
     const ApiKey = "de972d173dd44d03623092703cd67ba8";
 
     const restarauntQueryURL =
@@ -287,7 +281,7 @@ function restaurantAPICall(cuisineId) {
         "&lon=" +
         long +
         "&cuisines=" +
-        cuisineId;
+        id;
 
     $.ajax({
         //calls giphy search
@@ -304,8 +298,8 @@ function restaurantAPICall(cuisineId) {
         $("#restdiv").empty();
 
         for (let i = 0; i < 10; i++) {
-            console.log(response.restaurants[i].restaurant.name);
-            console.log(response.restaurants[i].restaurant.phone_numbers);
+            //console.log(response.restaurants[i].restaurant.name);
+            //console.log(response.restaurants[i].restaurant.phone_numbers);
 
             const restname = $("<p>").text(
                 "Restaurant Name: " + response.restaurants[i].restaurant.name
@@ -399,9 +393,9 @@ function stopStartGif() {
 function runApis(foodInput) {
 
     if (foodInput) {
-        getGif(foodInput);
-        getPic(foodInput);
-        getNutrition(foodInput);
+        //getGif(foodInput);
+        //getPic(foodInput);
+        //getNutrition(foodInput);
         cuisineAPICall(foodInput);
         //recipe(foodInput);
 
