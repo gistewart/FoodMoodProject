@@ -132,7 +132,7 @@ function getGif(foodInput) {
         console.log(response);
         //creates image div and appends to DOM
         for (let i = 0; i < 3; i++) {
-            const gifContent = "<img src=" + response.data[i].images.fixed_width.url + "/>";
+            const gifContent = "<img class='hvr-glow' src=" + response.data[i].images.fixed_width.url + "/>";
             $("#gifDiv").append(gifContent);
         }
 
@@ -250,7 +250,7 @@ function cuisineAPICall(foodInput) {
     }).then(function (response) {
         // response = JSON.parse(response);
 
-        //   console.log(response.cuisines);
+        console.log(response);
 
         let id;
 
@@ -393,9 +393,9 @@ function stopStartGif() {
 function runApis(foodInput) {
 
     if (foodInput) {
-        //getGif(foodInput);
-        //getPic(foodInput);
-        //getNutrition(foodInput);
+        getGif(foodInput);
+        getPic(foodInput);
+        getNutrition(foodInput);
         cuisineAPICall(foodInput);
         //recipe(foodInput);
 

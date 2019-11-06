@@ -213,10 +213,6 @@ body {
   flex-direction: column;
 }
 
-.container {
-  overflow: auto;
-}
-
 #imgDivHolder,
 #gifDivHolder {
   border-radius: 16px;
