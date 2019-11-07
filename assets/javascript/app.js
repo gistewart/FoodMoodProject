@@ -314,6 +314,8 @@ function restaurantAPICall(lat, long, id) {
 
             $("#restdiv").append(restname, restnumber);
         }
+
+        $("#restdiv").prepend("<h4 id='restLabel'>Restaurants</h4>");
     });
 }
 
@@ -393,11 +395,11 @@ function stopStartGif() {
 function runApis(foodInput) {
 
     if (foodInput) {
-        //getGif(foodInput);
-        //getPic(foodInput);
-        //getNutrition(foodInput);
+        getGif(foodInput);
+        getPic(foodInput);
+        getNutrition(foodInput);
         cuisineAPICall(foodInput);
-        //recipe(foodInput);
+        recipe(foodInput);
 
         //resets values
         gifOffset = 0;

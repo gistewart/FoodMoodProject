@@ -200,18 +200,7 @@ body {
   width: 90%;
   margin: 0 auto;
 }
-#restdiv {
-  background: gray;
-  color: white;
-  padding: 15px;
-  width: 30%;
-  height: 250px;
-  overflow: scroll;
-  border: 1px solid #ccc;
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-}
+
 
 #imgDivHolder,
 #gifDivHolder {
@@ -253,17 +242,29 @@ footer {
 }
 
 #restdiv {
-    background-color: whitesmoke;
-    border-radius: 16px;
+    background-color: rgb(255, 245, 224);
+    border: solid 2px rgb(0, 35, 0);
     color: black;
+    overflow-y: scroll;
+    height: 300px;
 }
 
-p {
+#restLabel {
+  border-bottom: solid 1px rgb(0, 35, 0);
+  color: rgb(0, 35, 0);
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', fantasy;
+  text-align: center;
+}
+
+#restdiv p {
   margin: 0;
+  text-align: center;
 }
 
-a {
+#restdiv a {
   margin-bottom: 1em;
+  text-align: center;
+  display:block;
 }
 
 /* Glow */
