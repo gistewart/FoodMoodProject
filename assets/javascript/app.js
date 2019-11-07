@@ -212,7 +212,7 @@ function recipe(foodInput) {
         //     .attr("target", "_blank");
         // $("#recipeDiv").append(title, recipe);
 
-        recipeTitle = `<h3>RECIPE: <a href="${response.recipes[recidx].source_url}">${response.recipes[recidx].title}</a></h3>`;
+        recipeTitle = `<h3>RECIPE: </h3><h3><a href="${response.recipes[recidx].source_url}">${response.recipes[recidx].title}</a></h3>`;
         $("#headlines").append(recipeTitle);
 
         //creates refresh button
@@ -371,7 +371,7 @@ function refreshRecipe() {
     //empties div and adds new headline
     $("#refreshArticle").remove();
     $("#headlines").empty();
-    recipeTitle = `<h3>RECIPE: <a href="${recipeObj.recipes[recidx].source_url}">${recipeObj.recipes[recidx].title}</a></h3>`;
+    recipeTitle = `<h3>RECIPE: </h3><h3><a href="${recipeObj.recipes[recidx].source_url}">${recipeObj.recipes[recidx].title}</a></h3>`;
     $("#headlines").append(recipeTitle);
 
     //creates refresh button
