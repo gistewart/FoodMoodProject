@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <!-- Links to bootstrap and css file-->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
     <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
     <title>Food Mood</title>
 </head>
@@ -16,204 +17,208 @@
     <h1 class="hvr-grow text-center" id="topTitle">Food Mood</h1>
 
     <div class="searchbar input-group col-md-6 mb-3 mx-auto">
-        <input id="foodInput" type="text" class="form-control" placeholder="Input Favorite Food" aria-label="Input Your Favorite Food" aria-describedby="button-addon2">
+        <input id="foodInput" type="text" class="form-control" placeholder="Input Favorite Food"
+            aria-label="Input Your Favorite Food" aria-describedby="button-addon2">
         <div class="input-group-append">
             <button class="btn btn-outline-secondary" type="button" id="foodButton">Generate</button>
             <p></p>
         </div>
     </div>
 
-    <div class="presets">
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <button id="strawberries" type="button" class="preset btn btn-outline-secondary">
-                        Strawberry
-                        <img class=""
-                            src="https://images.unsplash.com/photo-1549007953-2f2dc0b24019?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=975&q=80"
-                            alt="strawberries" width="100px" height="150px">
-                    </button>
-                </div>
+    <div class="container">
+        <div class="presets row">
+            <div class="col-2">
+                <button id="strawberries" type="button" class="preset btn btn-outline-secondary">
+                    <span class="presetlabel">Strawberry</span>
+                    <img class=""
+                        src="https://images.unsplash.com/photo-1549007953-2f2dc0b24019?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=975&q=80"
+                        alt="strawberries" width="100px" height="150px">
+                </button>
+            </div>
 
-                <div class="col">
-                    <button id="pasta" type="button" class="preset btn btn-outline-secondary">
-                        Pasta
-                        <img class=""
-                            src="https://images.unsplash.com/photo-1570700258112-e259d3dbafb4?ixlib=rb-1.2.1&auto=format&fit=crop&w=934&q=80"
-                            alt="penne pasta" width="100px" height="150px">
-                    </button>
-                </div>
+            <div class="col-2">
+                <button id="pasta" type="button" class="preset btn btn-outline-secondary">
+                    <span class="presetlabel">Pasta</span>
+                    <img class=""
+                        src="https://images.unsplash.com/photo-1570700258112-e259d3dbafb4?ixlib=rb-1.2.1&auto=format&fit=crop&w=934&q=80"
+                        alt="penne pasta" width="100px" height="150px">
+                </button>
+            </div>
 
-                <div class="col">
-                    <button id="fried chicken wing" type="button" class="preset btn btn-outline-secondary">
-                        Chicken
-                        <img class=""
-                            src="https://belquistwist.com/wp-content/uploads/2019/08/dominican-chicken-wings-683x1024.jpg"
-                            alt="waaangs" width="100px" height="150px">
-                    </button>
-                </div>
+            <div class="col-2">
+                <button id="fried chicken wing" type="button" class="preset btn btn-outline-secondary">
+                    <span class="presetlabel">Chicken</span>
+                    <img class=""
+                        src="https://belquistwist.com/wp-content/uploads/2019/08/dominican-chicken-wings-683x1024.jpg"
+                        alt="waaangs" width="100px" height="150px">
+                </button>
+            </div>
 
-                <div class="col">
-                    <button id="broccoli" type="button" class="preset btn btn-outline-secondary">
-                        Broccoli
-                        <img class=""
-                            src="https://images.unsplash.com/photo-1506808547685-e2ba962ded60?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=675&q=80"
-                            alt="broc" width="100px" height="150px">
-                    </button>
-                </div>
+            <div class="col-2">
+                <button id="broccoli" type="button" class="preset btn btn-outline-secondary">
+                    <span class="presetlabel">Broccoli</span>
+                    <img class=""
+                        src="https://images.unsplash.com/photo-1506808547685-e2ba962ded60?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=675&q=80"
+                        alt="broc" width="100px" height="150px">
+                </button>
+            </div>
 
-                <div class="col">
-                    <button id="bacon" type="button" class="preset btn btn-outline-secondary">
-                        Bacon
-                        <img class=""
-                            src="https://images.unsplash.com/photo-1529856426070-e610ede5a2fd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=975&q=80"
-                            alt="bacon slab" width="100px" height="150px">
-                    </button>
-                </div>
+            <div class="col-2">
+                <button id="bacon" type="button" class="preset btn btn-outline-secondary">
+                    <span class="presetlabel">Bacon</span>
+                    <img class=""
+                        src="https://images.unsplash.com/photo-1529856426070-e610ede5a2fd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=975&q=80"
+                        alt="bacon slab" width="100px" height="150px">
+                </button>
+            </div>
 
-                <div class="col">
-                    <button id="chocolate" type="button" class="preset btn btn-outline-secondary">
-                        Chocolate
-                        <img class=""
-                            src="https://images.unsplash.com/photo-1560081223-734e568800b7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=60"
-                            alt="chocolate ocean" width="100px" height="150px">
-                    </button>
-                </div>
+            <div class="col-2">
+                <button id="chocolate" type="button" class="preset btn btn-outline-secondary">
+                    <span class="presetlabel">Chocolate</span>
+                    <img class=""
+                        src="https://images.unsplash.com/photo-1560081223-734e568800b7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=60"
+                        alt="chocolate ocean" width="100px" height="150px">
+                </button>
             </div>
         </div>
-    </div>
-
-
-    <div class="container" id="imgDivHolder">
-        <div class="row" id="imgDiv"></div>
-    </div>
-
-    <div class="container">
         <div class="row">
-            <div class="col-4">
-                <div id="nutDiv">
-                    <div class="container">
+            <div class="container" id="imgDivHolder">
+                <div class="row" id="imgDiv"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6 col-md-6 col-lg-4">
+                <div class="row">
+                    <div id="nutDiv">
+                        <div class="container">
 
-                        <div class="row header">
-                            <div class="col-12">
-                                Nutrition Facts
+                            <div class="row header">
+                                <div class="col-12">
+                                    Nutrition Facts
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="row serving-size">
-                            <div class="col-2 servingSizeLabel">
-                                Item
+                            <div class="row serving-size">
+                                <div class="col-2 servingSizeLabel">
+                                    Item
+                                </div>
+                                <div class="col-10 nutVal text-right" id="servingSizeAmt">
+                                </div>
                             </div>
-                            <div class="col-10 nutVal text-right" id="servingSizeAmt">
-                            </div>
-                        </div>
 
-                        <div class="row calories">
-                            <div class="col-6 amtPerServing">
-                                Amount per item
+                            <div class="row calories">
+                                <div class="col-6 amtPerServing">
+                                    Amount per item
+                                    <div class="row">
+                                        <div class="col-12 calLabel">Calories</div>
+                                    </div>
+                                </div>
+                                <div class="col-6 text-right" id="calAmt">
+                                </div>
+                            </div>
+
+                            <div class="details">
                                 <div class="row">
-                                    <div class="col-12 calLabel">Calories</div>
+                                    <div class="col-8 stdLabel">
+                                        Total Fat
+                                    </div>
+                                    <div class="col-4 text-right" id="fatAmt">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-6 text-right" id="calAmt">
-                            </div>
-                        </div>
 
-                        <div class="details">
-                            <div class="row">
-                                <div class="col-8 stdLabel">
-                                    Total Fat
+                                <div class="row">
+                                    <div class="col-8 stdLabel">
+                                        Cholesterol
+                                    </div>
+                                    <div class="col-4 text-right" id="cholesterolAmt">
+                                    </div>
                                 </div>
-                                <div class="col-4 text-right" id="fatAmt">
-                                </div>
-                            </div>
 
-                            <div class="row">
-                                <div class="col-8 stdLabel">
-                                    Cholesterol
+                                <div class="row">
+                                    <div class="col-6 stdLabel">
+                                        Sodium
+                                    </div>
+                                    <div class="col-6 text-right" id="sodiumAmt">
+                                    </div>
                                 </div>
-                                <div class="col-4 text-right" id="cholesterolAmt">
-                                </div>
-                            </div>
 
-                            <div class="row">
-                                <div class="col-6 stdLabel">
-                                    Sodium
+                                <div class="row">
+                                    <div class="col-8 stdLabel">
+                                        Carbohydrates
+                                    </div>
+                                    <div class="col-4 text-right" id="carbohydrateAmt">
+                                    </div>
                                 </div>
-                                <div class="col-6 text-right" id="sodiumAmt">
-                                </div>
-                            </div>
 
-                            <div class="row">
-                                <div class="col-8 stdLabel">
-                                    Carbohydrates
+                                <div class="row">
+                                    <div class="col-8 stdLabel">
+                                        Fiber
+                                    </div>
+                                    <div class="col-4 text-right" id="fiberAmt">
+                                    </div>
                                 </div>
-                                <div class="col-4 text-right" id="carbohydrateAmt">
-                                </div>
-                            </div>
 
-                            <div class="row">
-                                <div class="col-8 stdLabel">
-                                    Fiber
-                                </div>
-                                <div class="col-4 text-right" id="fiberAmt">
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-8 stdLabel">
-                                    Protein
-                                </div>
-                                <div class="col-4 text-right" id="proteinAmt">
+                                <div class="row">
+                                    <div class="col-8 stdLabel">
+                                        Protein
+                                    </div>
+                                    <div class="col-4 text-right" id="proteinAmt">
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div id="vitaDiv">
-                    <!-------------------------------------------------->
-                    <!-- beginning of vitDiv section -->
-                    <div id="vitDiv">
-                        <div class="container">
-                            <div class="card" style="width: 170px">
-                                <img class="card-img" src="assets/images/vitamins.jpeg" alt="Vitamin info" width:100%>
-                                <div class="card-img-overlay">
-                                    <div class="header">
-                                        <p class="vit-header">% of Daily Value</p>
-                                    </div>
-                                    <div class="rounded-circle vitA-shape">
-                                        <p class="vit-label">Vit A</p>
-                                        <p class="vit-amt" id="vitA-amt"></p>
-                                    </div>
-                                    <div class="rounded-circle vitC-shape">
-                                        <p class="vit-label">Vit C</p>
-                                        <p class="vit-amt" id="vitC-amt"></p>
-                                    </div>
-                                    <div class="rounded-circle calcium-shape">
-                                        <p class="vit-label">Ca</p>
-                                        <p class="vit-amt" id="calcium-amt"></p>
-                                    </div>
-                                    <div class="rounded-circle iron-shape">
-                                        <p class="vit-label">Iron</p>
-                                        <p class="vit-amt" id="iron-amt"></p>
+                
+                    <div class="row" id="vitaDiv">
+                        <!-------------------------------------------------->
+                        <!-- beginning of vitDiv section -->
+                        <div id="vitDiv">
+                            <div class="container">
+                                <div class="card" style="width: 170px">
+                                    <img class="card-img" src="assets/images/vitamins.jpeg" alt="Vitamin info"
+                                        width:100%>
+                                    <div class="card-img-overlay">
+                                        <div class="header">
+                                            <p class="vit-header">% of Daily Value</p>
+                                        </div>
+                                        <div class="rounded-circle vitA-shape">
+                                            <p class="vit-label">Vit A</p>
+                                            <p class="vit-amt" id="vitA-amt"></p>
+                                        </div>
+                                        <div class="rounded-circle vitC-shape">
+                                            <p class="vit-label">Vit C</p>
+                                            <p class="vit-amt" id="vitC-amt"></p>
+                                        </div>
+                                        <div class="rounded-circle calcium-shape">
+                                            <p class="vit-label">Ca</p>
+                                            <p class="vit-amt" id="calcium-amt"></p>
+                                        </div>
+                                        <div class="rounded-circle iron-shape">
+                                            <p class="vit-label">Iron</p>
+                                            <p class="vit-amt" id="iron-amt"></p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
+                        <!-- end of vitDiv section -->
                     </div>
                 
-                    <!-- end of vitDiv section --></div>
             </div>
-            <div class="col-4" id="gifDivHolder">
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="row"><div id="restdiv"></div></div>
+                <div class="row"><div id="headlines"></div></div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4" id="gifDivHolder">
                 <div id="gifDiv"></div>
             </div>
-            <div class="col-4" id="restdiv"></div>
         </div>
+
+
     </div>
 
-    <div id="recipeDiv"></div>
-
-    <footer id="headlines"></footer>
 
     <!-- Links to jquery and javascript file -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
